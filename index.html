@@ -1,1971 +1,1302 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
     <meta name="description" content="Aditya Gorkal - Project Manager at IIIT Raichur specializing in Enterprise Digital Transformation, Cross-Functional Leadership, Strategic Management, and Technology Governance.">
-
     <meta name="author" content="Aditya Gorkal">
-
-
 
     <title>Aditya Gorkal | Project Manager - IIIT Raichur</title>
 
-
-
     <!-- Three.js Library for Rendered 3D Background & Glass Visuals -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-
 
     <style>
 
-
-
         /* =========================================================
-
            GLOBAL & GLASSMORPHISM DESIGN SYSTEM
-
         ========================================================= */
-
-
 
         :root {
-
             --navy: #07111f;
-
             --navy-light: #0d1b2e;
-
             --crimson: #c8102e;
-
             --crimson-dark: #970d24;
-
             --crimson-light: #ff284d;
-
             --white: #ffffff;
-
             --glass-bg: rgba(13, 27, 46, 0.65);
-
             --glass-card: rgba(255, 255, 255, 0.07);
-
             --glass-card-hover: rgba(255, 255, 255, 0.12);
-
             --glass-border: rgba(255, 255, 255, 0.18);
-
             --glass-border-crimson: rgba(200, 16, 46, 0.4);
-
             --text-main: #f0f4f8;
-
             --text-muted: #a0aec0;
-
             --shadow-3d: 0 30px 60px rgba(0, 0, 0, 0.5);
-
         }
-
-
 
         * {
-
             box-sizing: border-box;
-
             margin: 0;
-
             padding: 0;
-
         }
-
-
 
         html {
-
             scroll-behavior: smooth;
-
         }
-
-
 
         body {
-
             font-family: "Segoe UI", Inter, Arial, sans-serif;
-
             color: var(--text-main);
-
             background: #040911;
-
             line-height: 1.6;
-
             overflow-x: hidden;
-
             perspective: 1000px;
-
             position: relative;
-
         }
-
-
 
         a {
-
             text-decoration: none;
-
         }
-
-
 
         /* Fixed 3D WebGL Canvas Background */
-
         #canvas-container {
-
             position: fixed;
-
             top: 0;
-
             left: 0;
-
             width: 100vw;
-
             height: 100vh;
-
             z-index: -1;
-
             pointer-events: none;
-
         }
-
-
 
         /* Floating Sticky Glossy Red Experience Badge */
-
         .sticky-experience-badge {
-
             position: fixed;
-
             right: 30px;
-
             bottom: 30px;
-
             width: 110px;
-
             height: 110px;
-
             border-radius: 50%;
-
             background: radial-gradient(circle at 35% 35%, #ff3b5c, #c8102e 60%, #6e0012);
-
             border: 2px solid rgba(255, 255, 255, 0.6);
-
             color: white;
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
-
             align-items: center;
-
             text-align: center;
-
             padding: 10px;
-
             box-shadow: 
-
                 0 10px 25px rgba(200, 16, 46, 0.6),
-
                 inset -4px -4px 10px rgba(0, 0, 0, 0.5),
-
                 inset 4px 4px 10px rgba(255, 255, 255, 0.6);
-
             z-index: 9999;
-
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-
             cursor: pointer;
-
         }
-
-
 
         .sticky-experience-badge:hover {
-
             transform: scale(1.1) rotate(5deg);
-
             box-shadow: 
-
                 0 15px 35px rgba(200, 16, 46, 0.8),
-
                 inset -4px -4px 10px rgba(0, 0, 0, 0.5),
-
                 inset 4px 4px 12px rgba(255, 255, 255, 0.8);
-
         }
-
-
 
         .sticky-badge-text {
-
             font-size: 0.85rem;
-
             font-weight: 800;
-
             line-height: 1.1;
-
             text-transform: uppercase;
-
             letter-spacing: 0.5px;
-
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-
         }
-
-
 
         /* Glass Panel Base Styling */
-
         .glass-panel {
-
             background: var(--glass-card);
-
             backdrop-filter: blur(16px);
-
             -webkit-backdrop-filter: blur(16px);
-
             border: 1px solid var(--glass-border);
-
             border-radius: 16px;
-
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-
         }
 
-
-
         /* =========================================================
-
            SCROLL 3D REVEAL ANIMATIONS
-
         ========================================================= */
-
-
 
         .reveal-3d {
-
             opacity: 0;
-
             transform: translateY(60px) rotateX(-12deg) scale(0.96);
-
             transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-
             will-change: transform, opacity;
-
         }
-
-
 
         .reveal-3d.active {
-
             opacity: 1;
-
             transform: translateY(0) rotateX(0deg) scale(1);
-
         }
 
-
-
         /* =========================================================
-
            NAVIGATION (GLASSMORPHISM)
-
         ========================================================= */
-
-
 
         nav {
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
-
             background: rgba(7, 17, 31, 0.75);
-
             backdrop-filter: blur(20px);
-
             -webkit-backdrop-filter: blur(20px);
-
             border-bottom: 1px solid var(--glass-border);
-
         }
-
-
 
         .nav-container {
-
             max-width: 1180px;
-
             margin: auto;
-
             padding: 18px 25px;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
         }
-
-
 
         .logo {
-
             color: white;
-
             font-size: 1.25rem;
-
             font-weight: 800;
-
             letter-spacing: 1px;
-
             transition: 0.3s;
-
         }
-
-
 
         .logo span {
-
             color: var(--crimson);
-
         }
-
-
 
         .nav-links {
-
             display: flex;
-
             gap: 25px;
-
             list-style: none;
-
         }
-
-
 
         .nav-links a {
-
             color: var(--text-muted);
-
             font-size: 0.9rem;
-
             font-weight: 600;
-
             transition: 0.3s;
-
         }
-
-
 
         .nav-links a:hover {
-
             color: white;
-
             text-shadow: 0 0 10px rgba(255,255,255,0.5);
-
         }
 
-
-
         /* =========================================================
-
            HERO SECTION
-
         ========================================================= */
-
-
 
         .hero {
-
             position: relative;
-
             min-height: 80vh;
-
             display: flex;
-
             align-items: center;
-
             padding: 85px 25px;
-
         }
-
-
 
         .hero-container {
-
             position: relative;
-
             z-index: 2;
-
             max-width: 1180px;
-
             width: 100%;
-
             margin: auto;
-
             display: grid;
-
             grid-template-columns: 210px 1fr;
-
             gap: 50px;
-
             align-items: center;
-
         }
-
-
 
         .profile-wrapper {
-
             position: relative;
-
             width: 190px;
-
             height: 190px;
-
         }
-
-
 
         .profile-photo {
-
             width: 190px;
-
             height: 190px;
-
             border-radius: 50%;
-
             object-fit: cover;
-
             border: 4px solid var(--crimson);
-
             box-shadow: 
-
                 0 0 30px rgba(200, 16, 46, 0.4),
-
                 0 25px 50px rgba(0,0,0,0.6);
-
         }
-
-
 
         .hero h1 {
-
             font-size: clamp(2.5rem, 5vw, 4.2rem);
-
             line-height: 1.1;
-
             margin-bottom: 12px;
-
             letter-spacing: -1px;
-
         }
-
-
 
         .hero h1 span {
-
             color: var(--crimson-light);
-
         }
-
-
 
         .hero-subtitle {
-
             color: var(--crimson-light);
-
             font-size: 1.1rem;
-
             font-weight: 700;
-
             text-transform: uppercase;
-
             letter-spacing: 2.5px;
-
             margin-bottom: 8px;
-
         }
-
-
 
         .hero-title {
-
             font-size: 1.35rem;
-
             font-weight: 700;
-
             color: #e2e8f0;
-
             margin-bottom: 18px;
-
         }
-
-
 
         .hero-description {
-
             max-width: 760px;
-
             color: var(--text-muted);
-
             font-size: 1.05rem;
-
             margin-bottom: 28px;
-
         }
-
-
 
         .hero-buttons {
-
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 15px;
-
         }
 
-
-
         /* =========================================================
-
            BUTTONS (GLASS & CRIMSON)
-
         ========================================================= */
-
-
 
         .btn {
-
             display: inline-block;
-
             padding: 12px 26px;
-
             border-radius: 8px;
-
             font-weight: 700;
-
             font-size: 0.95rem;
-
             transition: all 0.35s ease;
-
             backdrop-filter: blur(10px);
-
         }
-
-
 
         .btn-primary {
-
             background: var(--crimson);
-
             color: white;
-
             border: 1px solid rgba(255, 255, 255, 0.2);
-
             box-shadow: 0 8px 25px rgba(200, 16, 46, 0.4);
-
         }
-
-
 
         .btn-primary:hover {
-
             background: var(--crimson-light);
-
             transform: translateY(-4px);
-
             box-shadow: 0 15px 35px rgba(200, 16, 46, 0.6);
-
         }
-
-
 
         .btn-outline {
-
             background: rgba(255, 255, 255, 0.05);
-
             border: 1px solid var(--glass-border);
-
             color: white;
-
         }
-
-
 
         .btn-outline:hover {
-
             background: rgba(255, 255, 255, 0.15);
-
             border-color: white;
-
             transform: translateY(-4px);
-
         }
 
-
-
         /* =========================================================
-
            SECTIONS & LAYOUT
-
         ========================================================= */
-
-
 
         .container {
-
             max-width: 1180px;
-
             margin: auto;
-
             padding: 0 25px;
-
         }
-
-
 
         section {
-
             padding: 90px 0;
-
         }
-
-
 
         .section-heading {
-
             margin-bottom: 50px;
-
         }
-
-
 
         .section-label {
-
             color: var(--crimson-light);
-
             text-transform: uppercase;
-
             font-weight: 800;
-
             font-size: 0.8rem;
-
             letter-spacing: 2px;
-
             margin-bottom: 8px;
-
         }
-
-
 
         .section-heading h2 {
-
             font-size: 2.3rem;
-
             color: white;
-
             line-height: 1.2;
-
         }
 
-
-
         /* =========================================================
-
            METRICS GLASS CARDS (3 CARDS)
-
         ========================================================= */
-
-
 
         .metric-grid {
-
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
             gap: 20px;
-
         }
-
-
 
         .metric-card {
-
             padding: 30px 20px;
-
             text-align: center;
-
         }
-
-
 
         .metric-card:hover {
-
             transform: translateY(-8px) rotateX(5deg);
-
             border-color: var(--glass-border-crimson);
-
             background: var(--glass-card-hover);
-
         }
-
-
 
         .metric-number {
-
             font-size: 2.4rem;
-
             font-weight: 900;
-
             color: var(--crimson-light);
-
             margin-bottom: 5px;
-
         }
-
-
 
         .metric-label {
-
             color: var(--text-muted);
-
             font-size: 0.88rem;
-
             font-weight: 600;
-
         }
 
-
-
         /* =========================================================
-
            ABOUT SECTION
-
         ========================================================= */
-
-
 
         .about-grid {
-
             display: grid;
-
             grid-template-columns: 1.3fr 1fr;
-
             gap: 40px;
-
             align-items: stretch;
-
         }
-
-
 
         .about-card {
-
             padding: 40px;
-
         }
-
-
 
         .about-card p {
-
             color: #cbd5e1;
-
             font-size: 1.05rem;
-
             margin-bottom: 18px;
-
         }
-
-
 
         .focus-card {
-
             padding: 40px;
-
             border-left: 4px solid var(--crimson);
-
         }
-
-
 
         .focus-card h3 {
-
             font-size: 1.3rem;
-
             margin-bottom: 20px;
-
             color: white;
-
         }
-
-
 
         .focus-card ul {
-
             list-style: none;
-
         }
-
-
 
         .focus-card li {
-
             padding: 12px 0;
-
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
             color: #cbd5e1;
-
         }
-
-
 
         .focus-card li:last-child {
-
             border-bottom: none;
-
         }
-
-
 
         .focus-card li::before {
-
             content: "✦";
-
             color: var(--crimson-light);
-
             margin-right: 12px;
-
         }
 
-
-
         /* =========================================================
-
            SKILLS
-
         ========================================================= */
-
-
 
         .skill-grid {
-
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
             gap: 20px;
-
         }
-
-
 
         .skill-card {
-
             padding: 30px;
-
             transform-style: preserve-3d;
-
         }
-
-
 
         .skill-card:hover {
-
             transform: translateY(-10px) rotateY(8deg);
-
             background: var(--glass-card-hover);
-
             border-color: var(--glass-border-crimson);
-
         }
-
-
 
         .skill-icon {
-
             width: 42px;
-
             height: 42px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             background: rgba(200, 16, 46, 0.2);
-
             color: var(--crimson-light);
-
             border: 1px solid rgba(200, 16, 46, 0.4);
-
             border-radius: 8px;
-
             font-weight: 900;
-
             margin-bottom: 18px;
-
         }
-
-
 
         .skill-card h3 {
-
             font-size: 1.1rem;
-
             margin-bottom: 10px;
-
             color: white;
-
         }
-
-
 
         .skill-card p {
-
             font-size: 0.88rem;
-
             color: var(--text-muted);
-
         }
 
-
-
         /* =========================================================
-
            EXPERIENCE TIMELINE
-
         ========================================================= */
-
-
 
         .timeline-container {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 25px;
-
         }
-
-
 
         .timeline-card {
-
             padding: 35px 40px;
-
             position: relative;
-
             border-left: 4px solid var(--crimson);
-
         }
-
-
 
         .timeline-card:hover {
-
             border-color: var(--crimson-light);
-
             background: var(--glass-card-hover);
-
         }
-
-
 
         .timeline-header {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: flex-start;
-
             flex-wrap: wrap;
-
             gap: 10px;
-
             margin-bottom: 12px;
-
         }
-
-
 
         .timeline-role {
-
             font-size: 1.35rem;
-
             font-weight: 800;
-
             color: white;
-
         }
-
-
 
         .timeline-company {
-
             color: var(--crimson-light);
-
             font-weight: 700;
-
             font-size: 1.05rem;
-
             margin-top: 2px;
-
         }
-
-
 
         .timeline-location {
-
             color: var(--text-muted);
-
             font-size: 0.85rem;
-
             font-weight: 600;
-
         }
-
-
 
         .timeline-date {
-
             color: var(--crimson-light);
-
             font-size: 0.88rem;
-
             font-weight: 700;
-
             background: rgba(200, 16, 46, 0.15);
-
             padding: 4px 12px;
-
             border-radius: 20px;
-
             border: 1px solid rgba(200, 16, 46, 0.3);
-
         }
-
-
 
         .timeline-card p.timeline-desc {
-
             color: #d1d5db;
-
             font-size: 0.95rem;
-
             margin-bottom: 15px;
-
             font-style: italic;
-
         }
-
-
 
         .timeline-card ul {
-
             padding-left: 20px;
-
             color: #cbd5e1;
-
         }
-
-
 
         .timeline-card li {
-
             margin-bottom: 8px;
-
             line-height: 1.6;
-
             font-size: 0.95rem;
-
         }
 
-
-
         /* =========================================================
-
            CERTIFICATIONS & EDUCATION
-
         ========================================================= */
-
-
 
         .cert-grid {
-
             display: grid;
-
             grid-template-columns: repeat(4, 1fr);
-
             gap: 20px;
-
         }
-
-
 
         .cert-card {
-
             padding: 30px 20px;
-
             text-align: center;
-
             border-top: 3px solid var(--crimson-light);
-
         }
-
-
 
         .cert-card:hover {
-
             transform: translateY(-8px);
-
             background: var(--glass-card-hover);
-
         }
-
-
 
         .cert-card h3 {
-
             font-size: 1.05rem;
-
             color: white;
-
         }
-
-
 
         .education-grid {
-
             display: grid;
-
             grid-template-columns: repeat(2, 1fr);
-
             gap: 20px;
-
         }
-
-
 
         .education-card {
-
             padding: 35px;
-
             border-left: 4px solid var(--crimson);
-
         }
-
-
 
         .education-card h3 {
-
             color: white;
-
             font-size: 1.25rem;
-
             margin-bottom: 6px;
-
         }
-
-
 
         .education-card p {
-
             color: var(--text-muted);
-
         }
-
-
 
         .education-card .degree-date {
-
             color: var(--crimson-light);
-
             font-weight: 600;
-
             font-size: 0.88rem;
-
             margin-top: 8px;
-
         }
 
-
-
         /* =========================================================
-
            HONORS & AWARDS
-
         ========================================================= */
-
-
 
         .honors-card {
-
             padding: 35px;
-
             display: flex;
-
             align-items: flex-start;
-
             gap: 20px;
-
             border-left: 4px solid var(--crimson-light);
-
         }
-
-
 
         .honors-icon {
-
             font-size: 2.5rem;
-
         }
-
-
 
         .honors-info h3 {
-
             color: white;
-
             font-size: 1.3rem;
-
             margin-bottom: 4px;
-
         }
-
-
 
         .honors-company {
-
             color: var(--crimson-light);
-
             font-weight: 700;
-
             font-size: 1.05rem;
-
             margin-bottom: 10px;
-
         }
-
-
 
         .honors-info p {
-
             color: #cbd5e1;
-
             font-size: 0.98rem;
-
             line-height: 1.6;
-
         }
 
-
-
         /* =========================================================
-
            CONTACT
-
         ========================================================= */
-
-
 
         .contact-card {
-
             padding: 60px 30px;
-
             text-align: center;
-
             background: rgba(13, 27, 46, 0.8);
-
         }
-
-
 
         .contact-card h2 {
-
             font-size: 2.4rem;
-
             margin-bottom: 12px;
-
             color: white;
-
         }
-
-
 
         .contact-card p {
-
             color: var(--text-muted);
-
             max-width: 650px;
-
             margin: 0 auto 30px;
-
             font-size: 1.05rem;
-
         }
-
-
 
         .contact-details {
-
             display: flex;
-
             justify-content: center;
-
             gap: 25px;
-
             flex-wrap: wrap;
-
             margin-bottom: 30px;
-
             color: #e2e8f0;
-
             font-size: 0.95rem;
-
         }
-
-
 
         .contact-details span {
-
             display: flex;
-
             align-items: center;
-
             gap: 8px;
-
         }
-
-
 
         .contact-links {
-
             display: flex;
-
             justify-content: center;
-
             gap: 15px;
-
             flex-wrap: wrap;
-
         }
 
-
-
         /* =========================================================
-
            FOOTER
-
         ========================================================= */
-
-
 
         footer {
-
             padding: 25px;
-
             text-align: center;
-
             color: var(--text-muted);
-
             font-size: 0.85rem;
-
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-
         }
-
-
 
         /* =========================================================
-
            RESPONSIVE
-
         ========================================================= */
 
-
-
         @media (max-width: 900px) {
-
             .skill-grid, .cert-grid, .metric-grid, .education-grid {
-
                 grid-template-columns: repeat(2, 1fr);
-
             }
-
             .about-grid {
-
                 grid-template-columns: 1fr;
-
             }
-
         }
-
-
 
         @media (max-width: 700px) {
-
             .nav-links { display: none; }
-
             .hero-container {
-
                 grid-template-columns: 1fr;
-
                 text-align: center;
-
             }
-
             .profile-wrapper {
-
                 margin: auto;
-
             }
-
             .hero-buttons {
-
                 justify-content: center;
-
             }
-
             .skill-grid, .cert-grid, .metric-grid, .education-grid {
-
                 grid-template-columns: 1fr;
-
             }
-
             .timeline-header {
-
                 flex-direction: column;
-
                 align-items: flex-start;
-
             }
-
             .sticky-experience-badge {
-
                 width: 90px;
-
                 height: 90px;
-
                 right: 15px;
-
                 bottom: 15px;
-
             }
-
             .sticky-badge-text {
-
                 font-size: 0.7rem;
-
             }
-
         }
 
-
-
     </style>
-
 </head>
-
-
-
 
 
 <body>
 
-
-
     <!-- 3D Rendered WebGL Canvas Container -->
-
     <div id="canvas-container"></div>
 
-
-
     <!-- Floating Sticky Glossy Red Experience Badge (Right Side - Follows Scroll to Bottom) -->
-
     <div class="sticky-experience-badge" title="4 Years Experience">
-
         <div class="sticky-badge-text">Experience<br>4 Years</div>
-
     </div>
 
 
-
-
-
     <!-- =========================================================
-
          NAVIGATION
-
     ========================================================= -->
 
-
-
     <nav>
-
         <div class="nav-container">
-
             <div class="logo">
-
                 ADITYA<span>.</span>
-
             </div>
-
             <ul class="nav-links">
-
                 <li><a href="#about">About</a></li>
-
                 <li><a href="#skills">Skills</a></li>
-
                 <li><a href="#experience">Experience</a></li>
-
                 <li><a href="#certifications">Certifications</a></li>
-
                 <li><a href="#honors">Honors</a></li>
-
                 <li><a href="#education">Education</a></li>
-
                 <li><a href="#contact">Contact</a></li>
-
             </ul>
-
         </div>
-
     </nav>
 
 
-
-
-
     <!-- =========================================================
-
          HERO SECTION
-
     ========================================================= -->
-
-
 
     <header class="hero">
 
-
-
         <div class="hero-container">
 
-
-
             <div class="profile-wrapper">
-
                 <img 
-
                     src="my.jpeg" 
-
                     alt="Aditya Gorkal Profile Photo" 
-
                     class="profile-photo"
-
                 >
-
             </div>
-
-
 
             <div>
-
                 <div class="hero-subtitle">Navigating AI paradigms</div>
-
                 <h1>
-
                     Aditya <span>Gorkal</span>
-
                 </h1>
 
-
-
                 <div class="hero-title">
-
                     Project Manager • Indian Institute of Information Technology, Raichur 
-
                     <br>
-
                     <span class="hero-subtitle">
-
                         Enterprise Digital Transformation • Cross-Functional Leadership • Technology Governance
-
                 </div>
-
-
 
                 <p class="hero-description">
-
                     Product and Program Management professional with an MBA from Indiana University of Pennsylvania, driving enterprise digital transformation, cross-functional strategic alignment, and technology governance across distributed systems, fintech, telecom, and deep-tech incubation platforms.
-
                 </p>
 
-
-
                 <div class="hero-buttons">
-
                     <a href="#contact" class="btn btn-primary">
-
                         Open to Work • Let's Connect
-
                     </a>
-
                     <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-
                         LinkedIn
-
                     </a>
-
                     <a href="https://github.com/aditya-gorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-
                         GitHub
-
                     </a>
-
                 </div>
-
             </div>
 
-
-
         </div>
-
-
 
     </header>
 
 
-
-
-
     <!-- =========================================================
-
          METRICS (GLASS CARDS)
-
     ========================================================= -->
 
-
-
     <div class="container reveal-3d">
-
         <div class="metric-grid">
-
             <div class="glass-panel metric-card">
-
                 <div class="metric-number">4 Yrs</div>
-
                 <div class="metric-label">Total Experience</div>
-
             </div>
-
             <div class="glass-panel metric-card">
-
                 <div class="metric-number">4</div>
-
                 <div class="metric-label">Professional Certifications</div>
-
             </div>
-
             <div class="glass-panel metric-card">
-
                 <div class="metric-number">MBA</div>
-
                 <div class="metric-label">Indiana University of Pennsylvania</div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
 
 
     <main>
 
-
-
         <!-- =====================================================
-
              ABOUT SECTION
-
         ====================================================== -->
-
-
 
         <section id="about" class="reveal-3d">
-
             <div class="container">
-
                 <div class="section-heading">
-
                     <div class="section-label">Summary</div>
-
                     <h2>Strategic Management for Scaling AI Platforms.</h2>
-
                 </div>
-
-
 
                 <div class="about-grid">
-
                     <div class="glass-panel about-card">
-
                         <p>
-
                             Product and Program Management professional with an MBA from Indiana University of Pennsylvania, specializing in enterprise digital transformation, strategic technology governance, cross-functional leadership, and distributed systems.
-
                         </p>
-
                         <p>
-
                             Proven track record translating complex enterprise vision into scalable operational frameworks, bridging high-level corporate strategy with cross-functional technical implementation across financial services, telecommunications, distributed logistics, and technology incubators.
-
                         </p>
-
                         <p>
-
-                            Currently serving as Project Manager at <strong>Indian Institute of Information Technology, Raichur</strong>, managing the NAIN 2.0 PMU initiative under KITS to nurture deep-tech incubation frameworks and strategic industry partnerships.
-
+                            Currently working as Project Manager at <strong>Indian Institute of Information Technology, Raichur</strong>, managing the NAIN 2.0 PMU initiative under KITS to nurture deep-tech incubation frameworks and strategic industry partnerships.
                         </p>
-
                     </div>
-
-
 
                     <div class="glass-panel focus-card">
-
                         <h3>Core Competencies</h3>
-
                         <ul>
-
                             <li>Enterprise Digital Transformation</li>
-
                             <li>Product Lifecycle Strategy & Management</li>
-
                             <li>Cross-Functional Leadership & Alignment</li>
-
                             <li>Technology Governance & Risk Management</li>
-
                             <li>Production-Grade AI & Distributed Systems</li>
-
                             <li>Stakeholder Engagement & PMO Execution</li>
-
                         </ul>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
 
-
-
-
         <!-- =====================================================
-
              TOP SKILLS
-
         ====================================================== -->
-
-
 
         <section id="skills" class="reveal-3d">
-
             <div class="container">
-
                 <div class="section-heading">
-
                     <div class="section-label">Capabilities</div>
-
                     <h2>Top Skills</h2>
-
                 </div>
-
-
 
                 <div class="skill-grid">
-
                     <div class="glass-panel skill-card">
-
                         <div class="skill-icon">01</div>
-
                         <h3>Enterprise Strategy & Stakeholder Assessment</h3>
-
                         <p>Formulating high-level strategic roadmaps, conducting comprehensive stakeholder evaluations, aligning business objectives with technology execution, and driving executive decision-making across complex enterprise initiatives.</p>
-
                     </div>
 
-
-
                     <div class="glass-panel skill-card">
-
                         <div class="skill-icon">02</div>
-
                         <h3>Machine Learning - RAG Systems</h3>
-
                         <p>Architecting Retrieval-Augmented Generation (RAG) pipelines leveraging vector databases, semantic indexing, and domain-adapted knowledge stores.</p>
-
                     </div>
-
-
 
                     <div class="glass-panel skill-card">
-
                         <div class="skill-icon">03</div>
-
                         <h3>Agentic AI Implementation</h3>
-
                         <p>Designing multi-agent decision networks, automated reasoning chains, and agentic workflows to execute autonomous enterprise tasks.</p>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
 
-
-
-
         <!-- =====================================================
-
              EXPERIENCE TIMELINE
-
         ====================================================== -->
 
-
-
         <section id="experience" class="reveal-3d">
-
             <div class="container">
-
                 <div class="section-heading">
-
                     <div class="section-label">Career Journey</div>
-
                     <h2>Professional Experience</h2>
-
                 </div>
-
-
 
                 <div class="timeline-container">
 
-
-
                     <!-- IIIT Raichur -->
-
                     <div class="glass-panel timeline-card">
-
                         <div class="timeline-header">
-
                             <div>
-
                                 <div class="timeline-role">Project Manager</div>
-
                                 <div class="timeline-company">Indian Institute of Information Technology, Raichur</div>
-
                                 <div class="timeline-location">Raichur, Karnataka, India</div>
-
                             </div>
-
                             <div class="timeline-date">April 2026 - Present</div>
-
                         </div>
-
                         <p class="timeline-desc">Overseeing the IIIT Raichur-PMU for the NAIN 2.0 Program under KITS (Government of Karnataka), fostering student startups with focus on AI-driven platforms, deep-tech research, and machine learning deployments.</p>
-
                         <ul>
-
                             <li>Coordinate with NHIs for smooth implementation of NAIN 2.0 incubator initiatives and deep-tech innovation pipelines.</li>
-
                             <li>Facilitate screening, technical evaluation, and milestone reviews for startup proposals.</li>
-
                             <li>Monitor project progress, fund utilization, and program outcomes across participating research institutes.</li>
-
                             <li>Act as liaison between KITS, NHIs and PMU in collaboration with Industry experts and Venture Capitalist.</li>
-
                             <li>Ensure compliance, timely submission of reports, UCs, and technical documentation.</li>
-
                         </ul>
-
                     </div>
-
-
 
                     <!-- Karnataka Bank -->
-
                     <div class="glass-panel timeline-card">
-
                         <div class="timeline-header">
-
                             <div>
-
                                 <div class="timeline-role">Probationary Officer</div>
-
                                 <div class="timeline-company">Karnataka Bank</div>
-
                                 <div class="timeline-location">India</div>
-
                             </div>
-
                             <div class="timeline-date">May 2025 - December 2025</div>
-
                         </div>
-
                         <ul>
-
                             <li>Utilized Finacle and CRM enterprise platforms to manage core banking operations and automated data workflows.</li>
-
                             <li>Managed direct customer relationships, banking operations, financial advisory, and retail credit evaluation to drive portfolio growth.</li>
-
                         </ul>
-
                     </div>
 
-
-
                     <!-- Giant Eagle -->
-
                     <div class="glass-panel timeline-card">
-
                         <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Distributed Systems Support</div>
+                                <div class="timeline-company">Giant Eagle, Inc.</div>
+                                <div class="timeline-location">Pittsburgh, Pennsylvania, United States</div>
+                            </div>
+                            <div class="timeline-date">May 2024 - August 2024</div>
+                        </div>
+                        <ul>
+                            <li>Managed and optimized warehouse, supply chain, logistics, inventory management, and order fulfillment systems across enterprise distribution channels.</li>
+                            <li>Coordinated reverse logistics workflows through Manhattan Associates WMS, improving returns processing, inventory visibility, warehouse utilization, and end-to-end material flow.</li>
+                            <li>Supported distributed systems by monitoring interconnected applications, troubleshooting system dependencies, and coordinating issue resolution to maintain reliable data flow and service availability.</li>
+                        </ul>
+                    </div>
 
-                            <div> 
+                    <!-- Charter Communications -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Business System Analyst</div>
+                                <div class="timeline-company">Charter Communications</div>
+                                <div class="timeline-location">St. Louis, MO, United States</div>
+                            </div>
+                            <div class="timeline-date">February 2023 - May 2024</div>
+                        </div>
+                        <p class="timeline-desc">Analyzed complex data systems for Location Lifecycle Management (LLM) which is state and federal assistance programs across 24 US states under the RDOF initiative.</p>
+                        <ul>
+                            <li>Elicited business and functional requirements for scalable data pipelines orchestrating location lifecycle metadata through AWS services.</li>
+                            <li>Bridged technical gaps between business intelligence (BI) teams, SDE engineers, and compliance authorities for service qualification.</li>
+                        </ul>
+                    </div>
+
+                    <!-- BlackRock -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Project Manager (PMO)</div>
+                                <div class="timeline-company">BlackRock</div>
+                                <div class="timeline-location">Bear, Delaware, United States</div>
+                            </div>
+                            <div class="timeline-date">August 2022 - February 2023</div>
+                        </div>
+                        <ul>
+                            <li>Engineered and deployed an automated Program Management pipeline in accordance with OWASP guidelines for cyber security risk assessment across 120+ critical applications including Aladdin, iShares and BlackRock.com.</li>
+                            <li>Partnered with APG, Tech & Ops, and BRS teams to streamline vulnerability remediation and pen testing using structured, automated tracking frameworks.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Truist -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Scrum Master</div>
+                                <div class="timeline-company">Truist</div>
+                                <div class="timeline-location">Dallas, TX, United States</div>
+                            </div>
+                            <div class="timeline-date">January 2022 - August 2022</div>
+                        </div>
+                        <ul>
+                            <li>Orchestrated Agile SAFe cadence across complex financial initiatives, including Moody’s product integration and enterprise data migration projects.</li>
+                            <li>Facilitated cross-functional collaboration between engineering and business stakeholders to accelerate merger and acquisition IT integration strategies.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             CERTIFICATIONS
+        ====================================================== -->
+
+        <section id="certifications" class="reveal-3d">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="section-label">Credentials</div>
+                    <h2>Certifications</h2>
+                </div>
+
+                <div class="cert-grid">
+                    <div class="glass-panel cert-card">
+                        <h3>PMP® (Project Management Professional)</h3>
+                    </div>
+                    <div class="glass-panel cert-card">
+                        <h3>IBM Sterling Order Management</h3>
+                    </div>
+                    <div class="glass-panel cert-card">
+                        <h3>Scrum Master Accredited Certificate</h3>
+                    </div>
+                    <div class="glass-panel cert-card">
+                        <h3>Google Data Analytics</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             HONORS & AWARDS
+        ====================================================== -->
+
+        <section id="honors" class="reveal-3d">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="section-label">Recognition</div>
+                    <h2>Honors & Awards</h2>
+                </div>
+
+                <div class="glass-panel honors-card">
+                    <div class="honors-icon">🏆</div>
+                    <div class="honors-info">
+                        <h3>Project Manager Recognition</h3>
+                        <div class="honors-company">BlackRock</div>
+                        <p>
+                            Successfully designed and deployed an enterprise-wide Program Management pipeline for cybersecurity risk assessment across 120+ security-critical application ecosystems. Honored for exceptional execution in orchestrating cross-functional security remediations and streamlining risk governance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             EDUCATION
+        ====================================================== -->
+
+        <section id="education" class="reveal-3d">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="section-label">Academic Background</div>
+                    <h2>Education</h2>
+                </div>
+
+                <div class="education-grid">
+                    <div class="glass-panel education-card">
+                        <h3>Master of Business Administration (MBA)</h3>
+                        <p><strong>Indiana University of Pennsylvania</strong></p>
+                        <p>Specialization: Management Science</p>
+                        <div class="degree-date">September 2020 - May 2022</div>
+                    </div>
+
+                    <div class="glass-panel education-card">
+                        <h3>Bachelor's Degree</h3>
+                        <p><strong>Gulbarga University, Kalaburgi</strong></p>
+                        <div class="degree-date">July 2017 - June 2020</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             CONTACT
+        ====================================================== -->
+
+        <section id="contact" class="reveal-3d">
+            <div class="container">
+                <div class="glass-panel contact-card">
+                    <h2>Open to Work • Let's Connect</h2>
+                    <p>Currently working as Project Manager at Indian Institute of Information Technology, Raichur. Open to leadership and management discussions on Enterprise Strategy, Digital Transformation, Ethics and Governance.</p>
+
+                    <div class="contact-details">
+                        <span>📱 +91 8867643335</span>
+                        <span>✉️ adityagorkal0@gmail.com</span>
+                        <span>📍 Raichur, India</span>
+                    </div>
+
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn</a>
+                        <a href="https://github.com/aditya-gorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub</a>
+                        <a href="mailto:adityagorkal0@gmail.com" class="btn btn-outline">Email Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+        <p>&copy; Aditya Gorkal • Indian Institute of Information Technology, Raichur. All rights reserved.</p>
+    </footer>
+
+
+    <!-- =========================================================
+         3D THREE.JS OBJECTS & SCROLLING ANIMATIONS
+    ========================================================= -->
+
+    <script>
+        // 1. Three.js Setup with Real Rendered 3D Objects
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x040911, 0.0012);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 300;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0xc8102e, 2, 500);
+        pointLight1.position.set(200, 200, 100);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0x00d2ff, 1.5, 500);
+        pointLight2.position.set(-200, -200, 100);
+        scene.add(pointLight2);
+
+        // --- 3D OBJECT 1: Central Rotating Glass Torus Knot ---
+        const knotGeometry = new THREE.TorusKnotGeometry(45, 12, 128, 32);
+        const knotMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xc8102e,
+            metalness: 0.1,
+            roughness: 0.2,
+            transmission: 0.6,
+            thickness: 1.2,
+            transparent: true,
+            opacity: 0.55,
+            wireframe: true
+        });
+        const mainTorusKnot = new THREE.Mesh(knotGeometry, knotMaterial);
+        mainTorusKnot.position.set(120, 0, -50);
+        scene.add(mainTorusKnot);
+
+        // --- 3D OBJECT 2 & 3: Floating 3D Cubes & Octahedrons Group ---
+        const meshGroup = new THREE.Group();
+        const cubeGeo = new THREE.BoxGeometry(15, 15, 15);
+        const octaGeo = new THREE.OctahedronGeometry(12);
+
+        const meshMat = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.25
+        });
+
+        for (let i = 0; i < 25; i++) {
+            const isCube = Math.random() > 0.5;
+            const mesh = new THREE.Mesh(isCube ? cubeGeo : octaGeo, meshMat);
+
+            mesh.position.set(
+                (Math.random() - 0.5) * 600,
+                (Math.random() - 0.5) * 600,
+                (Math.random() - 0.5) * 400
+            );
+
+            mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+            meshGroup.add(mesh);
+        }
+        scene.add(meshGroup);
+
+        // Mouse Parallax Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.04;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.04;
+        });
+
+        // Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate 3D Torus Knot
+            mainTorusKnot.rotation.x += 0.005;
+            mainTorusKnot.rotation.y += 0.008;
+
+            // Rotate Floating Group
+            meshGroup.rotation.y += 0.002;
+            meshGroup.rotation.x += 0.001;
+
+            // Scroll Responsive Movement
+            const scrollY = window.scrollY;
+            mainTorusKnot.position.y = -scrollY * 0.15;
+            meshGroup.position.y = scrollY * 0.1;
+
+            // Smooth Camera Parallax
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // 2. Scroll Intersection Observer for 3D Reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-3d').forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+
+</body>
+</html>
