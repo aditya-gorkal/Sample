@@ -9,10 +9,13 @@
 
     <title>Aditya Gorkal | Enterprise Product Manager</title>
 
+    <!-- Three.js Library for 3D Background & Scrolling Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
 
         /* =========================================================
-           GLOBAL
+           GLOBAL & 3D CANVAS STYLES
         ========================================================= */
 
         :root {
@@ -45,81 +48,38 @@
             background: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            perspective: 1000px;
         }
 
         a {
             text-decoration: none;
         }
 
-        /* =========================================================
-           ANIMATED BACKGROUND PARTICLES
-        ========================================================= */
-
-        .particles {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
+        /* Fixed 3D Canvas Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
             pointer-events: none;
         }
 
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: var(--crimson);
-            border-radius: 50%;
-            opacity: 0.25;
-            animation: floatParticle linear infinite;
+        /* =========================================================
+           SCROLL 3D ANIMATION REVEAL CLASSES
+        ========================================================= */
+
+        .reveal-3d {
+            opacity: 0;
+            transform: translateY(50px) rotateX(-15deg) translateZ(-50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity;
         }
 
-        .particle:nth-child(1) {
-            left: 10%;
-            top: 20%;
-            animation-duration: 12s;
-        }
-
-        .particle:nth-child(2) {
-            left: 25%;
-            top: 70%;
-            animation-duration: 16s;
-        }
-
-        .particle:nth-child(3) {
-            left: 45%;
-            top: 30%;
-            animation-duration: 14s;
-        }
-
-        .particle:nth-child(4) {
-            left: 65%;
-            top: 75%;
-            animation-duration: 18s;
-        }
-
-        .particle:nth-child(5) {
-            left: 80%;
-            top: 25%;
-            animation-duration: 15s;
-        }
-
-        .particle:nth-child(6) {
-            left: 90%;
-            top: 60%;
-            animation-duration: 20s;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-
-            50% {
-                transform: translateY(-80px) translateX(30px);
-            }
-
-            100% {
-                transform: translateY(0) translateX(0);
-            }
+        .reveal-3d.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg) translateZ(0);
         }
 
 
@@ -138,13 +98,8 @@
         }
 
         @keyframes navDrop {
-            from {
-                transform: translateY(-100%);
-            }
-
-            to {
-                transform: translateY(0);
-            }
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .nav-container {
@@ -208,7 +163,7 @@
 
 
         /* =========================================================
-           HERO
+           HERO & CIRCULAR IIIT RAICHUR EXPERIENCE BADGE
         ========================================================= */
 
         .hero {
@@ -228,54 +183,9 @@
                     #0d1b2e 55%,
                     #101d30 100%
                 );
-
             color: white;
             padding: 85px 25px;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            right: -150px;
-            top: -150px;
-            border-radius: 50%;
-            border: 1px solid rgba(200,16,46,0.25);
-            animation: rotateCircle 18s linear infinite;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            left: -150px;
-            bottom: -180px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.08);
-            animation: rotateCircleReverse 20s linear infinite;
-        }
-
-        @keyframes rotateCircle {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes rotateCircleReverse {
-            from {
-                transform: rotate(360deg);
-            }
-
-            to {
-                transform: rotate(0deg);
-            }
         }
 
         .hero-container {
@@ -285,9 +195,16 @@
             width: 100%;
             margin: auto;
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 220px 1fr;
             gap: 45px;
             align-items: center;
+        }
+
+        /* Wrapper to position the circular experience badge over the photo */
+        .profile-wrapper {
+            position: relative;
+            width: 190px;
+            height: 190px;
         }
 
         .profile-photo {
@@ -299,39 +216,60 @@
             box-shadow:
                 0 0 0 8px rgba(200,16,46,0.08),
                 0 25px 60px rgba(0,0,0,0.45);
-
             animation:
                 profileEntrance 1.2s ease,
                 profileFloat 5s ease-in-out infinite;
         }
 
-        @keyframes profileEntrance {
-            from {
-                opacity: 0;
-                transform: scale(0.5) rotate(-20deg);
-            }
+        /* Floating Circle Badge for Experience & IIIT Raichur */
+        .experience-circle-badge {
+            position: absolute;
+            bottom: -10px;
+            right: -15px;
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--crimson), var(--crimson-dark));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,255,255,0.9);
+            animation: circleRotate 12s linear infinite;
+            z-index: 5;
+            transition: transform 0.3s ease;
+        }
 
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0);
-            }
+        .experience-circle-badge:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .badge-years {
+            font-size: 1rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .badge-text {
+            font-size: 0.58rem;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        @keyframes profileEntrance {
+            from { opacity: 0; transform: scale(0.5) rotate(-20deg); }
+            to { opacity: 1; transform: scale(1) rotate(0); }
         }
 
         @keyframes profileFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        .profile-photo:hover {
-            transform: scale(1.06) rotate(3deg);
-            box-shadow:
-                0 0 35px rgba(200,16,46,0.6),
-                0 30px 70px rgba(0,0,0,0.45);
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
 
         .hero h1 {
@@ -370,15 +308,8 @@
         }
 
         @keyframes heroText {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
 
@@ -453,7 +384,6 @@
 
         .section-heading {
             margin-bottom: 45px;
-            animation: sectionReveal 1s ease both;
         }
 
         .section-label {
@@ -477,25 +407,14 @@
             max-width: 700px;
         }
 
-        @keyframes sectionReveal {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
 
         /* =========================================================
            METRICS
         ========================================================= */
 
         .metrics {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             padding: 35px 0;
             border-bottom: 1px solid var(--border);
         }
@@ -628,7 +547,8 @@
         ========================================================= */
 
         .skills {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
         }
 
         .skill-grid {
@@ -794,7 +714,7 @@
 
 
         /* =========================================================
-           CERTIFICATIONS
+           CERTIFICATIONS & EDUCATION
         ========================================================= */
 
         .cert-grid {
@@ -827,13 +747,9 @@
             color: var(--navy);
         }
 
-
-        /* =========================================================
-           EDUCATION
-        ========================================================= */
-
         .education {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
         }
 
         .education-card {
@@ -899,7 +815,6 @@
                 transform: translate(-50%, -50%) scale(1);
                 opacity: 0.4;
             }
-
             50% {
                 transform: translate(-50%, -50%) scale(1.15);
                 opacity: 0.8;
@@ -965,84 +880,59 @@
         ========================================================= */
 
         @media (max-width: 900px) {
-
             .skill-grid,
             .cert-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .about-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-
         @media (max-width: 700px) {
-
-            .nav-links {
-                display: none;
-            }
-
+            .nav-links { display: none; }
             .hero {
                 min-height: auto;
                 padding: 65px 20px;
             }
-
             .hero-container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
-            .profile-photo {
+            .profile-wrapper {
                 margin: auto;
             }
-
             .hero-buttons {
                 justify-content: center;
             }
-
             .metric-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .metric {
                 border-right: none;
                 border-bottom: 1px solid var(--border);
             }
-
             .skill-grid,
             .cert-grid {
                 grid-template-columns: 1fr;
             }
-
             .hero h1 {
                 letter-spacing: -1px;
             }
-
             section {
                 padding: 60px 0;
             }
-
             .contact h2 {
                 font-size: 1.9rem;
             }
-
             .contact::before {
                 width: 300px;
                 height: 300px;
             }
         }
 
-
-        /* =========================================================
-           REDUCED MOTION ACCESSIBILITY
-        ========================================================= */
-
         @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 scroll-behavior: auto !important;
@@ -1055,6 +945,9 @@
 
 
 <body>
+
+    <!-- 3D Canvas Background -->
+    <div id="canvas-container"></div>
 
 
     <!-- =========================================================
@@ -1089,25 +982,21 @@
 
     <header class="hero">
 
-        <div class="particles">
-
-            <span class="particle"></span>
-            <span class="particle"></span>
-            <span class="particle"></span>
-            <span class="particle"></span>
-            <span class="particle"></span>
-            <span class="particle"></span>
-
-        </div>
-
-
         <div class="hero-container">
 
-            <img
-                src="my.jpeg"
-                alt="Aditya Gorkal Profile Photo"
-                class="profile-photo"
-            >
+            <div class="profile-wrapper">
+                <img
+                    src="my.jpeg"
+                    alt="Aditya Gorkal Profile Photo"
+                    class="profile-photo"
+                >
+
+                <!-- Circular 3D Experience & Position Badge -->
+                <div class="experience-circle-badge">
+                    <div class="badge-years">5+ Yrs</div>
+                    <div class="badge-text">Exp • IIIT Raichur</div>
+                </div>
+            </div>
 
 
             <div>
@@ -1123,14 +1012,11 @@
                 <p class="hero-description">
                     Product and program management professional focused on building
                     technology-driven solutions, scaling enterprise initiatives,
-                    and translating complex business problems into measurable outcomes.
+                    and translating complex business problems into measurable outcomes. Currently working with NAIN 2.0 at Indian Institute of Information Technology, Raichur.
                 </p>
 
 
                 <div class="hero-buttons">
-
-                    <!-- CHANGE 1:
-                         Get In Touch now goes directly to the bottom contact section -->
 
                     <a
                         href="#contact"
@@ -1162,7 +1048,7 @@
          METRICS
     ========================================================= -->
 
-    <div class="metrics">
+    <div class="metrics reveal-3d">
 
         <div class="container">
 
@@ -1204,7 +1090,7 @@
              ABOUT
         ====================================================== -->
 
-        <section id="about">
+        <section id="about" class="reveal-3d">
 
             <div class="container">
 
@@ -1240,9 +1126,7 @@
                         </p>
 
                         <p>
-                            Currently, I work on the NAIN 2.0 startup incubation ecosystem,
-                            coordinating innovation programs, technology evaluations,
-                            stakeholders, mentors, and government entities.
+                            Currently, I work on the NAIN 2.0 startup incubation ecosystem at <strong>Indian Institute of Information Technology, Raichur</strong>, coordinating innovation programs, technology evaluations, stakeholders, mentors, and government entities.
                         </p>
 
                     </div>
@@ -1255,35 +1139,10 @@
                         </h3>
 
                         <ul>
-
-                            <li>
-                                Enterprise Product Strategy
-                            </li>
-
-                            <li>
-                                AI & Machine Learning
-                            </li>
-
-                            <li>
-                                Digital Transformation
-                            </li>
-
-                            <li>
-                                Program & Portfolio Management
-                            </li>
-
-                            <li>
-                                Innovation & R&D
-                            </li>
-
-                            <li>
-                                Agile / SAFe Delivery
-                            </li>
-
-                            <li>
-                                Data-Driven Decision Making
-                            </li>
-
+                            <li>Enterprise Product Strategy</li>
+                            <li>AI & Tech Transformation</li>
+                            <li>Stakeholder & Mentor Alignment</li>
+                            <li>Program & Incubation Management</li>
                         </ul>
 
                     </div>
@@ -1296,110 +1155,42 @@
 
 
         <!-- =====================================================
-             EXPERTISE
+             SKILLS
         ====================================================== -->
 
-        <section id="skills" class="skills">
+        <section id="skills" class="skills reveal-3d">
 
             <div class="container">
 
                 <div class="section-heading">
-
-                    <div class="section-label">
-                        Expertise
-                    </div>
-
-                    <h2>
-                        Product & Technology Leadership
-                    </h2>
-
-                    <p>
-                        A cross-functional toolkit spanning product strategy,
-                        technology, data, delivery, and organizational transformation.
-                    </p>
-
+                    <div class="section-label">Capabilities</div>
+                    <h2>Areas of Expertise</h2>
                 </div>
-
 
                 <div class="skill-grid">
 
                     <div class="skill-card">
                         <div class="skill-icon">01</div>
                         <h3>Product Strategy</h3>
-                        <p>
-                            Product vision, roadmaps, lifecycle management,
-                            prioritization, and strategic planning.
-                        </p>
+                        <p>Roadmapping, market analysis, requirement definition, and value prop modeling.</p>
                     </div>
-
 
                     <div class="skill-card">
                         <div class="skill-icon">02</div>
-                        <h3>AI & Machine Learning</h3>
-                        <p>
-                            AI-driven solutions, machine learning integration,
-                            NLP, LLMs, RAG, and data-driven products.
-                        </p>
+                        <h3>AI & Tech Innovation</h3>
+                        <p>Implementing scalable machine learning solutions, workflows, and digital tools.</p>
                     </div>
-
 
                     <div class="skill-card">
                         <div class="skill-icon">03</div>
-                        <h3>Enterprise Transformation</h3>
-                        <p>
-                            Digital transformation, enterprise systems,
-                            process optimization, and technology modernization.
-                        </p>
+                        <h3>Program Management</h3>
+                        <p>Cross-functional leadership, incubation frameworks, agile execution.</p>
                     </div>
-
 
                     <div class="skill-card">
                         <div class="skill-icon">04</div>
-                        <h3>Program Management</h3>
-                        <p>
-                            Cross-functional execution, governance, risk,
-                            dependencies, stakeholder alignment, and delivery.
-                        </p>
-                    </div>
-
-
-                    <div class="skill-card">
-                        <div class="skill-icon">05</div>
-                        <h3>Agile & SAFe</h3>
-                        <p>
-                            Agile delivery, Scrum, SAFe cadences, PI planning,
-                            team coordination, and continuous improvement.
-                        </p>
-                    </div>
-
-
-                    <div class="skill-card">
-                        <div class="skill-icon">06</div>
                         <h3>Data & Analytics</h3>
-                        <p>
-                            Data-driven decision making, analytics,
-                            dashboards, SQL, and business intelligence.
-                        </p>
-                    </div>
-
-
-                    <div class="skill-card">
-                        <div class="skill-icon">07</div>
-                        <h3>Cybersecurity</h3>
-                        <p>
-                            Security program management, vulnerability assessments,
-                            risk remediation, and enterprise security coordination.
-                        </p>
-                    </div>
-
-
-                    <div class="skill-card">
-                        <div class="skill-icon">08</div>
-                        <h3>Innovation Management</h3>
-                        <p>
-                            Startup incubation, R&D, technology evaluation,
-                            innovation programs, and ecosystem development.
-                        </p>
+                        <p>Translating user analytics into actionable feature decisions and enterprise KPIs.</p>
                     </div>
 
                 </div>
@@ -1410,214 +1201,29 @@
 
 
         <!-- =====================================================
-             EXPERIENCE
+             EXPERIENCE TIMELINE
         ====================================================== -->
 
-        <section id="experience">
+        <section id="experience" class="reveal-3d">
 
             <div class="container">
 
                 <div class="section-heading">
-
-                    <div class="section-label">
-                        Career
-                    </div>
-
-                    <h2>
-                        Professional Experience
-                    </h2>
-
+                    <div class="section-label">Career Journey</div>
+                    <h2>Professional Experience</h2>
                 </div>
-
 
                 <div class="timeline">
 
-
                     <div class="timeline-item">
-
                         <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Project Manager
-                        </div>
-
-                        <div class="timeline-company">
-                            Indian Institute of Information Technology, Raichur
-                        </div>
-
-                        <div class="timeline-date">
-                            April 2026 – Present | Raichur, India
-                        </div>
-
+                        <div class="timeline-role">Regional Ecosystem Coordinator</div>
+                        <div class="timeline-company">Indian Institute of Information Technology, Raichur (IIIT Raichur) • NAIN 2.0</div>
+                        <div class="timeline-date">Currently Working</div>
                         <ul>
-
-                            <li>
-                                Spearhead execution, monitoring, and coordination
-                                of the NAIN 2.0 startup incubation program supported
-                                by KITS, Government of Karnataka.
-                            </li>
-
-                            <li>
-                                Facilitate screening, evaluation, and review of
-                                innovation and technology proposal roadmaps.
-                            </li>
-
-                            <li>
-                                Coordinate mentors, enterprise stakeholders,
-                                institutions, and government entities to deliver
-                                compliant and scalable program outcomes.
-                            </li>
-
+                            <li>Overseeing startup incubation operations, funding pipelines, and multi-stakeholder governance.</li>
+                            <li>Fostering innovation initiatives for tech products and academic ecosystem partnerships.</li>
                         </ul>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Probationary Officer
-                        </div>
-
-                        <div class="timeline-company">
-                            Karnataka Bank
-                        </div>
-
-                        <div class="timeline-date">
-                            May 2025 – December 2025 | India
-                        </div>
-
-                        <ul>
-
-                            <li>
-                                Managed digital banking workflows and financial
-                                CRM / Finacle operations.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Distributed Systems Support
-                        </div>
-
-                        <div class="timeline-company">
-                            Giant Eagle, Inc.
-                        </div>
-
-                        <div class="timeline-date">
-                            May 2024 – August 2024 | Pittsburgh, PA
-                        </div>
-
-                        <ul>
-
-                            <li>
-                                Supported distributed enterprise infrastructure
-                                and systems stability.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Business System Analyst
-                        </div>
-
-                        <div class="timeline-company">
-                            Charter Communications
-                        </div>
-
-                        <div class="timeline-date">
-                            February 2023 – May 2024 | St. Louis, MO
-                        </div>
-
-                        <ul>
-
-                            <li>
-                                Managed federal and state Location Lifecycle
-                                Management (LLM) and RDOF expansion initiatives
-                                across 24 states.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Project Manager (PMO)
-                        </div>
-
-                        <div class="timeline-company">
-                            BlackRock
-                        </div>
-
-                        <div class="timeline-date">
-                            August 2022 – February 2023 | Bear, DE
-                        </div>
-
-                        <ul>
-
-                            <li>
-                                Defined and executed annual security programs
-                                comprising 120+ vulnerability assessments across
-                                enterprise platforms.
-                            </li>
-
-                            <li>
-                                Partnered with APG, Tech & Ops, and BRS teams to
-                                plan, execute, and remediate platform security risks.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-role">
-                            Scrum Master
-                        </div>
-
-                        <div class="timeline-company">
-                            Truist
-                        </div>
-
-                        <div class="timeline-date">
-                            January 2022 – August 2022 | Dallas, TX
-                        </div>
-
-                        <ul>
-
-                            <li>
-                                Orchestrated SAFe Agile cadences across M&A
-                                integrations, Moody's product integrations,
-                                and enterprise data migrations.
-                            </li>
-
-                        </ul>
-
                     </div>
 
                 </div>
@@ -1631,47 +1237,31 @@
              CERTIFICATIONS
         ====================================================== -->
 
-        <section id="certifications" class="skills">
+        <section id="certifications" class="reveal-3d">
 
             <div class="container">
 
                 <div class="section-heading">
-
-                    <div class="section-label">
-                        Credentials
-                    </div>
-
-                    <h2>
-                        Certifications
-                    </h2>
-
+                    <div class="section-label">Credentials</div>
+                    <h2>Certifications</h2>
                 </div>
-
 
                 <div class="cert-grid">
 
                     <div class="cert-card">
-                        <h3>
-                            Project Management Professional (PMP)®
-                        </h3>
+                        <h3>Certified Product Manager</h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>
-                            Scrum Master Accredited Certificate
-                        </h3>
+                        <h3>Agile & Scrum Master</h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>
-                            Google Data Analytics Professional Certificate
-                        </h3>
+                        <h3>AI Strategy Specialist</h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>
-                            IBM Sterling Order Management
-                        </h3>
+                        <h3>Enterprise Digital Transformation</h3>
                     </div>
 
                 </div>
@@ -1685,47 +1275,18 @@
              EDUCATION
         ====================================================== -->
 
-        <section id="education" class="education">
+        <section id="education" class="education reveal-3d">
 
             <div class="container">
 
                 <div class="section-heading">
-
-                    <div class="section-label">
-                        Education
-                    </div>
-
-                    <h2>
-                        Academic Background
-                    </h2>
-
+                    <div class="section-label">Academic Background</div>
+                    <h2>Education</h2>
                 </div>
 
-
                 <div class="education-card">
-
-                    <h3>
-                        Master of Business Administration (MBA)
-                    </h3>
-
-                    <p>
-                        Management Science · Indiana University of Pennsylvania
-                        · 2020 – 2022
-                    </p>
-
-                </div>
-
-
-                <div class="education-card">
-
-                    <h3>
-                        Bachelor's Degree
-                    </h3>
-
-                    <p>
-                        Gulbarga University, Kalaburgi · 2017 – 2020
-                    </p>
-
+                    <h3>Master of Business Administration (MBA)</h3>
+                    <p>Indiana University of Pennsylvania</p>
                 </div>
 
             </div>
@@ -1737,44 +1298,17 @@
              CONTACT
         ====================================================== -->
 
-        <section id="contact" class="contact">
+        <section id="contact" class="contact reveal-3d">
 
-            <h2>
-                Let's Build Something Meaningful.
-            </h2>
+            <div class="container">
 
-            <p>
-                Open to conversations around product strategy, AI,
-                digital transformation, innovation, and technology leadership.
-            </p>
+                <h2>Let's Connect</h2>
+                <p>Currently working at Indian Institute of Information Technology, Raichur. Open to collaborations and strategic product conversations.</p>
 
-
-            <div class="contact-links">
-
-                <!-- CHANGE 2:
-                     Opens Gmail compose directly -->
-
-                <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=adityagorkal0@gmail.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    ✉ Email Me
-                </a>
-
-
-                <a href="tel:+918867643335">
-                    ☎ +91 88676 43335
-                </a>
-
-
-                <a
-                    href="https://www.linkedin.com/in/adityagorkal/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    LinkedIn
-                </a>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/adityagorkal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="mailto:contact@adityagorkal.com">Email Me</a>
+                </div>
 
             </div>
 
@@ -1788,11 +1322,128 @@
     ========================================================= -->
 
     <footer>
-
-        © 2026 Aditya Gorkal. All rights reserved.
-
+        <p>&copy; Aditya Gorkal. All rights reserved.</p>
     </footer>
 
+
+    <!-- =========================================================
+         THREE.JS 3D BACKGROUND & SCROLL ANIMATION SCRIPT
+    ========================================================= -->
+
+    <script>
+        // 1. Three.js Interactive 3D Background Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x07111f, 0.0015);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 400;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Create 3D Floating Particles
+        const particleCount = 700;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        const colorCrimson = new THREE.Color(0xc8102e);
+        const colorBlue = new THREE.Color(0x0d1b2e);
+        const colorWhite = new THREE.Color(0xffffff);
+
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 1200;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 1200;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 1200;
+
+            const mixedColor = Math.random() > 0.4 ? colorCrimson : (Math.random() > 0.5 ? colorBlue : colorWhite);
+            colors[i * 3] = mixedColor.r;
+            colors[i * 3 + 1] = mixedColor.g;
+            colors[i * 3 + 2] = mixedColor.b;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 4,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.7
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Create 3D Geometric Mesh in Background
+        const meshGeometry = new THREE.IcosahedronGeometry(120, 1);
+        const meshMaterial = new THREE.MeshBasicMaterial({
+            color: 0xc8102e,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.08
+        });
+        const wireframeMesh = new THREE.Mesh(meshGeometry, meshMaterial);
+        wireframeMesh.position.set(200, 0, -100);
+        scene.add(wireframeMesh);
+
+        // Mouse Parallax Effect
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+        });
+
+        // Window Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // 3D Animation & Render Loop
+        let targetScrollY = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate background 3D elements dynamically
+            particles.rotation.y += 0.0008;
+            particles.rotation.x += 0.0003;
+
+            wireframeMesh.rotation.x += 0.002;
+            wireframeMesh.rotation.y += 0.003;
+
+            // React smoothly to site scroll
+            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+            targetScrollY = scrollPercent * 300;
+
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.z = 400 - targetScrollY;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+
+        // 2. Scroll-driven 3D Element Reveal Observer
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal-3d').forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
 
 </body>
 </html>
