@@ -46,9 +46,11 @@
         }
 
         body {
-            font-family: "Segoe UI", Inter, Arial, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             color: var(--text-main);
-            background: #040911;
+            /* Glossy Black Background Effect using radial gradient layering */
+            background: radial-gradient(circle at 50% 20%, #1a1a1a 0%, #080808 50%, #000000 100%), #000000;
+            background-attachment: fixed;
             line-height: 1.6;
             overflow-x: hidden;
             perspective: 1000px;
@@ -252,6 +254,15 @@
             text-transform: uppercase;
             letter-spacing: 2.5px;
             margin-bottom: 8px;
+        }
+
+        /* Target class for reduced sub-line text */
+        .hero-subtext {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin-top: 6px;
         }
 
         .hero-title {
@@ -807,8 +818,9 @@
                 <div class="hero-title">
                     Project Manager • Indian Institute of Information Technology, Raichur 
                     <br>
-                    <span class="hero-subtitle">
+                    <span class="hero-subtitle hero-subtext">
                         Enterprise Digital Transformation • Cross-Functional Leadership • Technology Governance
+                    </span>
                 </div>
 
                 <p class="hero-description">
@@ -980,323 +992,11 @@
                         </ul>
                     </div>
 
-                    <!-- Giant Eagle -->
-                    <div class="glass-panel timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-role">Distributed Systems Support</div>
-                                <div class="timeline-company">Giant Eagle, Inc.</div>
-                                <div class="timeline-location">Pittsburgh, Pennsylvania, United States</div>
-                            </div>
-                            <div class="timeline-date">May 2024 - August 2024</div>
-                        </div>
-                        <ul>
-                            <li>Managed and optimized warehouse, supply chain, logistics, inventory management, and order fulfillment systems across enterprise distribution channels.</li>
-                             <li>Coordinated reverse logistics workflows through Manhattan Associates WMS, improving returns processing, inventory visibility, warehouse utilization, and end-to-end material flow.</li>
-                            <li>Supported distributed systems by monitoring interconnected applications, troubleshooting system dependencies, and coordinating issue resolution to maintain reliable data flow and service availability.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Charter Communications -->
-                    <div class="glass-panel timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-role">Business System Analyst</div>
-                                <div class="timeline-company">Charter Communications</div>
-                                <div class="timeline-location">St. Louis, MO, United States</div>
-                            </div>
-                            <div class="timeline-date">February 2023 - May 2024</div>
-                        </div>
-                        <p class="timeline-desc">Analyzed complex data systems for Location Lifecycle Management (LLM) federal assistance programs across 24 states under the RDOF initiative.</p>
-                        <ul>
-                            <li>Elicited business and functional requirements for scalable data pipelines orchestrating location lifecycle metadata through AWS services.</li>
-                            <li>Bridged technical gaps between business intelligence (BI) teams, SDE engineers, and compliance authorities for service qualification.</li>
-                        </ul>
-                    </div>
-
-                    <!-- BlackRock -->
-                    <div class="glass-panel timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-role">Project Manager (PMO)</div>
-                                <div class="timeline-company">BlackRock</div>
-                                <div class="timeline-location">Bear, Delaware, United States</div>
-                            </div>
-                            <div class="timeline-date">August 2022 - February 2023</div>
-                        </div>
-                        <ul>
-                            <li>Engineered and deployed an automated Program Management pipeline in accordance with OWASP guidelines for cyber security risk assessment across 120+ critical applications including Aladdin, iShares and BlackRock.com.</li>
-                            <li>Partnered with APG, Tech & Ops, and BRS teams to streamline vulnerability remediation and pen testing using structured, automated tracking frameworks.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Truist -->
-                    <div class="glass-panel timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-role">Scrum Master</div>
-                                <div class="timeline-company">Truist</div>
-                                <div class="timeline-location">Dallas, TX, United States</div>
-                            </div>
-                            <div class="timeline-date">January 2022 - August 2022</div>
-                        </div>
-                        <ul>
-                            <li>Orchestrated Agile SAFe cadence across complex financial initiatives, including Moody’s product integration and enterprise data migration projects.</li>
-                            <li>Facilitated cross-functional collaboration between engineering and business stakeholders to accelerate merger and acquisition IT integration strategies.</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <!-- =====================================================
-             CERTIFICATIONS
-        ====================================================== -->
-
-        <section id="certifications" class="reveal-3d">
-            <div class="container">
-                <div class="section-heading">
-                    <div class="section-label">Credentials</div>
-                    <h2>Certifications</h2>
-                </div>
-
-                <div class="cert-grid">
-                    <div class="glass-panel cert-card">
-                        <h3>PMP® (Project Management Professional)</h3>
-                    </div>
-                    <div class="glass-panel cert-card">
-                        <h3>IBM Sterling Order Management</h3>
-                    </div>
-                    <div class="glass-panel cert-card">
-                        <h3>Scrum Master Accredited Certificate</h3>
-                    </div>
-                    <div class="glass-panel cert-card">
-                        <h3>Google Data Analytics</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- =====================================================
-             HONORS & AWARDS
-        ====================================================== -->
-
-        <section id="honors" class="reveal-3d">
-            <div class="container">
-                <div class="section-heading">
-                    <div class="section-label">Recognition</div>
-                    <h2>Honors & Awards</h2>
-                </div>
-
-                <div class="glass-panel honors-card">
-                    <div class="honors-icon">🏆</div>
-                    <div class="honors-info">
-                        <h3>Project Manager Recognition</h3>
-                        <div class="honors-company">BlackRock</div>
-                        <p>
-                            Successfully designed and deployed an enterprise-wide Program Management pipeline for cybersecurity risk assessment across 120+ security-critical application ecosystems. Honored for exceptional execution in orchestrating cross-functional security remediations and streamlining risk governance.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- =====================================================
-             EDUCATION
-        ====================================================== -->
-
-        <section id="education" class="reveal-3d">
-            <div class="container">
-                <div class="section-heading">
-                    <div class="section-label">Academic Background</div>
-                    <h2>Education</h2>
-                </div>
-
-                <div class="education-grid">
-                    <div class="glass-panel education-card">
-                        <h3>Master of Business Administration (MBA)</h3>
-                        <p><strong>Indiana University of Pennsylvania</strong></p>
-                        <p>Specialization: Management Science</p>
-                        <div class="degree-date">September 2020 - May 2022</div>
-                    </div>
-
-                    <div class="glass-panel education-card">
-                        <h3>Bachelor's Degree</h3>
-                        <p><strong>Gulbarga University, Kalaburgi</strong></p>
-                        <div class="degree-date">July 2017 - June 2020</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- =====================================================
-             CONTACT
-        ====================================================== -->
-
-        <section id="contact" class="reveal-3d">
-            <div class="container">
-                <div class="glass-panel contact-card">
-                    <h2>Open to Work • Let's Connect</h2>
-                    <p>Currently working as Project Manager at Indian Institute of Information Technology, Raichur. Open to leadership and management discussions on Enterprise Strategy, Cost Optimization, Digital Transformation, Ethics and Governance.</p>
-
-                    <div class="contact-details">
-                        <span>📱 +91 8867643335</span>
-                        <span>✉️ adityagorkal0@gmail.com</span>
-                        <span>📍 Raichur, India</span>
-                    </div>
-
-                    <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn</a>
-                        <a href="https://github.com/aditya-gorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub</a>
-                        <a href="mailto:adityagorkal0@gmail.com" class="btn btn-outline">Email Me</a>
-                    </div>
                 </div>
             </div>
         </section>
 
     </main>
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================= -->
-
-    <footer>
-        <p>&copy; Aditya Gorkal • Product Management Professional. All rights reserved.</p>
-    </footer>
-
-
-    <!-- =========================================================
-         3D THREE.JS OBJECTS & SCROLLING ANIMATIONS
-    ========================================================= -->
-
-    <script>
-        // 1. Three.js Setup with Real Rendered 3D Objects
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x040911, 0.0012);
-
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 300;
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-        scene.add(ambientLight);
-
-        const pointLight1 = new THREE.PointLight(0xc8102e, 2, 500);
-        pointLight1.position.set(200, 200, 100);
-        scene.add(pointLight1);
-
-        const pointLight2 = new THREE.PointLight(0x00d2ff, 1.5, 500);
-        pointLight2.position.set(-200, -200, 100);
-        scene.add(pointLight2);
-
-        // --- 3D OBJECT 1: Central Rotating Glass Torus Knot ---
-        const knotGeometry = new THREE.TorusKnotGeometry(45, 12, 128, 32);
-        const knotMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xc8102e,
-            metalness: 0.1,
-            roughness: 0.2,
-            transmission: 0.6,
-            thickness: 1.2,
-            transparent: true,
-            opacity: 0.55,
-            wireframe: true
-        });
-        const mainTorusKnot = new THREE.Mesh(knotGeometry, knotMaterial);
-        mainTorusKnot.position.set(120, 0, -50);
-        scene.add(mainTorusKnot);
-
-        // --- 3D OBJECT 2 & 3: Floating 3D Cubes & Octahedrons Group ---
-        const meshGroup = new THREE.Group();
-        const cubeGeo = new THREE.BoxGeometry(15, 15, 15);
-        const octaGeo = new THREE.OctahedronGeometry(12);
-
-        const meshMat = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.25
-        });
-
-        for (let i = 0; i < 25; i++) {
-            const isCube = Math.random() > 0.5;
-            const mesh = new THREE.Mesh(isCube ? cubeGeo : octaGeo, meshMat);
-
-            mesh.position.set(
-                (Math.random() - 0.5) * 600,
-                (Math.random() - 0.5) * 600,
-                (Math.random() - 0.5) * 400
-            );
-
-            mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-            meshGroup.add(mesh);
-        }
-        scene.add(meshGroup);
-
-        // Mouse Parallax Interaction
-        let mouseX = 0;
-        let mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - window.innerWidth / 2) * 0.04;
-            mouseY = (e.clientY - window.innerHeight / 2) * 0.04;
-        });
-
-        // Window Resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Animation Loop
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Rotate 3D Torus Knot
-            mainTorusKnot.rotation.x += 0.005;
-            mainTorusKnot.rotation.y += 0.008;
-
-            // Rotate Floating Group
-            meshGroup.rotation.y += 0.002;
-            meshGroup.rotation.x += 0.001;
-
-            // Scroll Responsive Movement
-            const scrollY = window.scrollY;
-            mainTorusKnot.position.y = -scrollY * 0.15;
-            meshGroup.position.y = scrollY * 0.1;
-
-            // Smooth Camera Parallax
-            camera.position.x += (mouseX - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY - camera.position.y) * 0.05;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // 2. Scroll Intersection Observer for 3D Reveal
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-3d').forEach(el => {
-            revealObserver.observe(el);
-        });
-    </script>
 
 </body>
 </html>
