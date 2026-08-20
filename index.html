@@ -10,16 +10,23 @@
     <title>Aditya Gorkal | Enterprise Product Manager</title>
 
     <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
         :root {
             --navy: #07111f;
             --navy-light: #0d1b2e;
             --crimson: #c8102e;
-            --crimson-dark: #9e0b23;
+            --crimson-dark: #970d24;
+            --crimson-light: #ff284d;
             --white: #ffffff;
             --light: #f5f6f8;
             --gray: #667085;
             --dark: #182230;
             --border: #e5e7eb;
+            --shadow: 0 20px 50px rgba(7, 17, 31, 0.12);
         }
 
         * {
@@ -37,21 +44,107 @@
             color: var(--dark);
             background: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
             text-decoration: none;
         }
 
-        /* NAVIGATION */
+        /* =========================================================
+           ANIMATED BACKGROUND PARTICLES
+        ========================================================= */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: var(--crimson);
+            border-radius: 50%;
+            opacity: 0.25;
+            animation: floatParticle linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            animation-duration: 12s;
+        }
+
+        .particle:nth-child(2) {
+            left: 25%;
+            top: 70%;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(3) {
+            left: 45%;
+            top: 30%;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(4) {
+            left: 65%;
+            top: 75%;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(5) {
+            left: 80%;
+            top: 25%;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(6) {
+            left: 90%;
+            top: 60%;
+            animation-duration: 20s;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-80px) translateX(30px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
 
         nav {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(7, 17, 31, 0.97);
-            backdrop-filter: blur(10px);
+            background: rgba(7, 17, 31, 0.94);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
+            animation: navDrop 0.8s ease;
+        }
+
+        @keyframes navDrop {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
         }
 
         .nav-container {
@@ -68,6 +161,12 @@
             font-size: 1.2rem;
             font-weight: 800;
             letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 15px rgba(200,16,46,0.7);
         }
 
         .logo span {
@@ -84,25 +183,106 @@
             color: #d8dee8;
             font-size: 0.9rem;
             font-weight: 600;
+            position: relative;
             transition: 0.3s;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--crimson);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             color: white;
         }
 
-        /* HERO */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
 
         .hero {
+            position: relative;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
             background:
-                radial-gradient(circle at 85% 20%, rgba(200,16,46,0.25), transparent 30%),
-                linear-gradient(135deg, #07111f 0%, #0d1b2e 55%, #101d30 100%);
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(200,16,46,0.28),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07111f 0%,
+                    #0d1b2e 55%,
+                    #101d30 100%
+                );
+
             color: white;
             padding: 85px 25px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            right: -150px;
+            top: -150px;
+            border-radius: 50%;
+            border: 1px solid rgba(200,16,46,0.25);
+            animation: rotateCircle 18s linear infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            left: -150px;
+            bottom: -180px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: rotateCircleReverse 20s linear infinite;
+        }
+
+        @keyframes rotateCircle {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateCircleReverse {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
         }
 
         .hero-container {
+            position: relative;
+            z-index: 2;
             max-width: 1180px;
+            width: 100%;
             margin: auto;
             display: grid;
             grid-template-columns: 180px 1fr;
@@ -116,7 +296,42 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--crimson);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+            box-shadow:
+                0 0 0 8px rgba(200,16,46,0.08),
+                0 25px 60px rgba(0,0,0,0.45);
+
+            animation:
+                profileEntrance 1.2s ease,
+                profileFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes profileEntrance {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-20deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        @keyframes profileFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.06) rotate(3deg);
+            box-shadow:
+                0 0 35px rgba(200,16,46,0.6),
+                0 30px 70px rgba(0,0,0,0.45);
         }
 
         .hero h1 {
@@ -124,6 +339,7 @@
             line-height: 1;
             margin-bottom: 18px;
             letter-spacing: -2px;
+            animation: heroText 1s ease 0.2s both;
         }
 
         .hero h1 span {
@@ -135,6 +351,7 @@
             font-weight: 600;
             color: #dbe4f0;
             margin-bottom: 18px;
+            animation: heroText 1s ease 0.4s both;
         }
 
         .hero-description {
@@ -142,31 +359,70 @@
             color: #aebbd0;
             font-size: 1rem;
             margin-bottom: 25px;
+            animation: heroText 1s ease 0.6s both;
         }
 
         .hero-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
+            animation: heroText 1s ease 0.8s both;
         }
+
+        @keyframes heroText {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
 
         .btn {
             display: inline-block;
-            padding: 11px 20px;
+            padding: 12px 22px;
             border-radius: 6px;
             font-weight: 700;
             font-size: 0.9rem;
-            transition: 0.3s;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.15);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 120%;
         }
 
         .btn-primary {
             background: var(--crimson);
             color: white;
+            box-shadow: 0 8px 25px rgba(200,16,46,0.3);
         }
 
         .btn-primary:hover {
             background: var(--crimson-dark);
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(200,16,46,0.45);
         }
 
         .btn-outline {
@@ -176,9 +432,14 @@
 
         .btn-outline:hover {
             border-color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* MAIN */
+
+        /* =========================================================
+           CONTAINER / SECTIONS
+        ========================================================= */
 
         .container {
             max-width: 1180px;
@@ -187,11 +448,12 @@
         }
 
         section {
-            padding: 75px 0;
+            padding: 80px 0;
         }
 
         .section-heading {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            animation: sectionReveal 1s ease both;
         }
 
         .section-label {
@@ -215,7 +477,22 @@
             max-width: 700px;
         }
 
-        /* METRICS */
+        @keyframes sectionReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           METRICS
+        ========================================================= */
 
         .metrics {
             background: white;
@@ -233,6 +510,11 @@
             text-align: center;
             padding: 15px;
             border-right: 1px solid var(--border);
+            transition: 0.4s;
+        }
+
+        .metric:hover {
+            transform: translateY(-8px) scale(1.03);
         }
 
         .metric:last-child {
@@ -243,6 +525,12 @@
             font-size: 2rem;
             font-weight: 900;
             color: var(--crimson);
+            transition: 0.3s;
+        }
+
+        .metric:hover .metric-number {
+            text-shadow: 0 5px 15px rgba(200,16,46,0.25);
+            transform: scale(1.08);
         }
 
         .metric-label {
@@ -251,7 +539,10 @@
             font-weight: 600;
         }
 
-        /* ABOUT */
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
 
         .about-grid {
             display: grid;
@@ -267,14 +558,38 @@
 
         .about-text p {
             margin-bottom: 16px;
+            transition: 0.3s;
+        }
+
+        .about-text p:hover {
+            transform: translateX(6px);
+            color: var(--dark);
         }
 
         .focus-card {
-            background: var(--navy);
+            background: linear-gradient(
+                145deg,
+                #07111f,
+                #102238
+            );
             color: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(7,17,31,0.12);
+            border-radius: 12px;
+            box-shadow:
+                0 25px 60px rgba(7,17,31,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            transform-style: preserve-3d;
+            transition: 0.5s;
+        }
+
+        .focus-card:hover {
+            transform:
+                perspective(1000px)
+                rotateX(4deg)
+                rotateY(-5deg)
+                translateY(-8px);
+            box-shadow:
+                20px 30px 60px rgba(7,17,31,0.25);
         }
 
         .focus-card h3 {
@@ -289,6 +604,12 @@
             padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             color: #d4dce8;
+            transition: 0.3s;
+        }
+
+        .focus-card li:hover {
+            padding-left: 8px;
+            color: white;
         }
 
         .focus-card li:last-child {
@@ -301,7 +622,10 @@
             margin-right: 10px;
         }
 
-        /* SKILLS */
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
 
         .skills {
             background: white;
@@ -314,17 +638,42 @@
         }
 
         .skill-card {
+            position: relative;
             padding: 25px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             background: #fff;
-            transition: 0.3s;
+            transition: all 0.45s ease;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--crimson);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: 0.4s;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--crimson);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            transform:
+                perspective(1000px)
+                rotateX(4deg)
+                rotateY(-4deg)
+                translateY(-10px);
+            border-color: rgba(200,16,46,0.35);
+            box-shadow:
+                15px 20px 45px rgba(7,17,31,0.12);
         }
 
         .skill-icon {
@@ -338,6 +687,14 @@
             border-radius: 6px;
             font-weight: 900;
             margin-bottom: 15px;
+            transition: 0.4s;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform:
+                translateZ(25px)
+                rotateY(15deg);
+            box-shadow: 0 8px 20px rgba(200,16,46,0.15);
         }
 
         .skill-card h3 {
@@ -351,7 +708,10 @@
             color: var(--gray);
         }
 
-        /* EXPERIENCE */
+
+        /* =========================================================
+           EXPERIENCE TIMELINE
+        ========================================================= */
 
         .timeline {
             position: relative;
@@ -365,13 +725,23 @@
             top: 5px;
             bottom: 5px;
             width: 2px;
-            background: #d8dce3;
+            background: linear-gradient(
+                to bottom,
+                var(--crimson),
+                #d8dce3,
+                var(--crimson)
+            );
         }
 
         .timeline-item {
             position: relative;
             padding-left: 45px;
             margin-bottom: 45px;
+            transition: 0.4s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px);
         }
 
         .timeline-dot {
@@ -383,7 +753,17 @@
             border-radius: 50%;
             background: var(--crimson);
             border: 3px solid white;
-            box-shadow: 0 0 0 2px var(--crimson);
+            box-shadow:
+                0 0 0 2px var(--crimson),
+                0 0 20px rgba(200,16,46,0.3);
+            transition: 0.4s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.5);
+            box-shadow:
+                0 0 0 4px rgba(200,16,46,0.15),
+                0 0 25px rgba(200,16,46,0.5);
         }
 
         .timeline-role {
@@ -412,7 +792,10 @@
             margin-bottom: 7px;
         }
 
-        /* CERTIFICATIONS */
+
+        /* =========================================================
+           CERTIFICATIONS
+        ========================================================= */
 
         .cert-grid {
             display: grid;
@@ -426,6 +809,17 @@
             border-radius: 8px;
             padding: 25px;
             border-top: 4px solid var(--crimson);
+            transition: 0.45s;
+            transform-style: preserve-3d;
+        }
+
+        .cert-card:hover {
+            transform:
+                perspective(900px)
+                rotateX(5deg)
+                rotateY(5deg)
+                translateY(-8px);
+            box-shadow: var(--shadow);
         }
 
         .cert-card h3 {
@@ -433,7 +827,10 @@
             color: var(--navy);
         }
 
-        /* EDUCATION */
+
+        /* =========================================================
+           EDUCATION
+        ========================================================= */
 
         .education {
             background: white;
@@ -444,6 +841,15 @@
             border-left: 4px solid var(--crimson);
             background: #f8f9fb;
             margin-bottom: 18px;
+            transition: 0.4s;
+        }
+
+        .education-card:hover {
+            transform:
+                perspective(900px)
+                rotateY(-2deg)
+                translateX(8px);
+            box-shadow: var(--shadow);
         }
 
         .education-card h3 {
@@ -455,13 +861,56 @@
             color: var(--gray);
         }
 
-        /* CONTACT */
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
 
         .contact {
-            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(200,16,46,0.25),
+                    transparent 35%
+                ),
+                var(--navy);
             color: white;
             text-align: center;
-            padding: 80px 25px;
+            padding: 100px 25px;
+        }
+
+        .contact::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 1px solid rgba(200,16,46,0.2);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: contactPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes contactPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 0.8;
+            }
+        }
+
+        .contact h2,
+        .contact p,
+        .contact-links {
+            position: relative;
+            z-index: 2;
         }
 
         .contact h2 {
@@ -484,17 +933,23 @@
         .contact-links a {
             color: white;
             border: 1px solid #4b586b;
-            padding: 10px 18px;
+            padding: 11px 20px;
             border-radius: 5px;
             font-size: 0.9rem;
+            transition: 0.35s;
         }
 
         .contact-links a:hover {
             border-color: var(--crimson);
             background: var(--crimson);
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 12px 30px rgba(200,16,46,0.3);
         }
 
-        /* FOOTER */
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
         footer {
             background: #040b14;
@@ -504,9 +959,13 @@
             font-size: 0.8rem;
         }
 
-        /* MOBILE */
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
 
         @media (max-width: 900px) {
+
             .skill-grid,
             .cert-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -517,9 +976,16 @@
             }
         }
 
+
         @media (max-width: 700px) {
+
             .nav-links {
                 display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 65px 20px;
             }
 
             .hero-container {
@@ -549,24 +1015,59 @@
                 grid-template-columns: 1fr;
             }
 
-            .hero {
-                padding: 60px 20px;
+            .hero h1 {
+                letter-spacing: -1px;
             }
 
             section {
-                padding: 55px 0;
+                padding: 60px 0;
+            }
+
+            .contact h2 {
+                font-size: 1.9rem;
+            }
+
+            .contact::before {
+                width: 300px;
+                height: 300px;
             }
         }
+
+
+        /* =========================================================
+           REDUCED MOTION ACCESSIBILITY
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- NAVIGATION -->
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
 
     <nav>
+
         <div class="nav-container">
-            <div class="logo">ADITYA<span>.</span></div>
+
+            <div class="logo">
+                ADITYA<span>.</span>
+            </div>
 
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -576,13 +1077,29 @@
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
         </div>
+
     </nav>
 
 
-    <!-- HERO -->
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
 
     <header class="hero">
+
+        <div class="particles">
+
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+
+        </div>
+
 
         <div class="hero-container">
 
@@ -591,6 +1108,7 @@
                 alt="Aditya Gorkal Profile Photo"
                 class="profile-photo"
             >
+
 
             <div>
 
@@ -608,14 +1126,19 @@
                     and translating complex business problems into measurable outcomes.
                 </p>
 
+
                 <div class="hero-buttons">
 
+                    <!-- CHANGE 1:
+                         Get In Touch now goes directly to the bottom contact section -->
+
                     <a
-                        href="mailto:adityagorkal0@gmail.com"
+                        href="#contact"
                         class="btn btn-primary"
                     >
                         Get In Touch
                     </a>
+
 
                     <a
                         href="https://www.linkedin.com/in/adityagorkal/"
@@ -635,7 +1158,9 @@
     </header>
 
 
-    <!-- METRICS -->
+    <!-- =========================================================
+         METRICS
+    ========================================================= -->
 
     <div class="metrics">
 
@@ -660,7 +1185,9 @@
 
                 <div class="metric">
                     <div class="metric-number">MBA</div>
-                    <div class="metric-label">Indiana University of Pennsylvania</div>
+                    <div class="metric-label">
+                        Indiana University of Pennsylvania
+                    </div>
                 </div>
 
             </div>
@@ -673,16 +1200,26 @@
     <main>
 
 
-        <!-- ABOUT -->
+        <!-- =====================================================
+             ABOUT
+        ====================================================== -->
 
         <section id="about">
 
             <div class="container">
 
                 <div class="section-heading">
-                    <div class="section-label">Profile</div>
-                    <h2>Building Products. Driving Transformation.</h2>
+
+                    <div class="section-label">
+                        Profile
+                    </div>
+
+                    <h2>
+                        Building Products. Driving Transformation.
+                    </h2>
+
                 </div>
+
 
                 <div class="about-grid">
 
@@ -710,18 +1247,43 @@
 
                     </div>
 
+
                     <div class="focus-card">
 
-                        <h3>Core Focus</h3>
+                        <h3>
+                            Core Focus
+                        </h3>
 
                         <ul>
-                            <li>Enterprise Product Strategy</li>
-                            <li>AI & Machine Learning</li>
-                            <li>Digital Transformation</li>
-                            <li>Program & Portfolio Management</li>
-                            <li>Innovation & R&D</li>
-                            <li>Agile / SAFe Delivery</li>
-                            <li>Data-Driven Decision Making</li>
+
+                            <li>
+                                Enterprise Product Strategy
+                            </li>
+
+                            <li>
+                                AI & Machine Learning
+                            </li>
+
+                            <li>
+                                Digital Transformation
+                            </li>
+
+                            <li>
+                                Program & Portfolio Management
+                            </li>
+
+                            <li>
+                                Innovation & R&D
+                            </li>
+
+                            <li>
+                                Agile / SAFe Delivery
+                            </li>
+
+                            <li>
+                                Data-Driven Decision Making
+                            </li>
+
                         </ul>
 
                     </div>
@@ -733,20 +1295,31 @@
         </section>
 
 
-        <!-- EXPERTISE -->
+        <!-- =====================================================
+             EXPERTISE
+        ====================================================== -->
 
         <section id="skills" class="skills">
 
             <div class="container">
 
                 <div class="section-heading">
-                    <div class="section-label">Expertise</div>
-                    <h2>Product & Technology Leadership</h2>
+
+                    <div class="section-label">
+                        Expertise
+                    </div>
+
+                    <h2>
+                        Product & Technology Leadership
+                    </h2>
+
                     <p>
                         A cross-functional toolkit spanning product strategy,
                         technology, data, delivery, and organizational transformation.
                     </p>
+
                 </div>
+
 
                 <div class="skill-grid">
 
@@ -759,6 +1332,7 @@
                         </p>
                     </div>
 
+
                     <div class="skill-card">
                         <div class="skill-icon">02</div>
                         <h3>AI & Machine Learning</h3>
@@ -767,6 +1341,7 @@
                             NLP, LLMs, RAG, and data-driven products.
                         </p>
                     </div>
+
 
                     <div class="skill-card">
                         <div class="skill-icon">03</div>
@@ -777,6 +1352,7 @@
                         </p>
                     </div>
 
+
                     <div class="skill-card">
                         <div class="skill-icon">04</div>
                         <h3>Program Management</h3>
@@ -785,6 +1361,7 @@
                             dependencies, stakeholder alignment, and delivery.
                         </p>
                     </div>
+
 
                     <div class="skill-card">
                         <div class="skill-icon">05</div>
@@ -795,6 +1372,7 @@
                         </p>
                     </div>
 
+
                     <div class="skill-card">
                         <div class="skill-icon">06</div>
                         <h3>Data & Analytics</h3>
@@ -804,6 +1382,7 @@
                         </p>
                     </div>
 
+
                     <div class="skill-card">
                         <div class="skill-icon">07</div>
                         <h3>Cybersecurity</h3>
@@ -812,6 +1391,7 @@
                             risk remediation, and enterprise security coordination.
                         </p>
                     </div>
+
 
                     <div class="skill-card">
                         <div class="skill-icon">08</div>
@@ -829,16 +1409,26 @@
         </section>
 
 
-        <!-- EXPERIENCE -->
+        <!-- =====================================================
+             EXPERIENCE
+        ====================================================== -->
 
         <section id="experience">
 
             <div class="container">
 
                 <div class="section-heading">
-                    <div class="section-label">Career</div>
-                    <h2>Professional Experience</h2>
+
+                    <div class="section-label">
+                        Career
+                    </div>
+
+                    <h2>
+                        Professional Experience
+                    </h2>
+
                 </div>
+
 
                 <div class="timeline">
 
@@ -860,6 +1450,7 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Spearhead execution, monitoring, and coordination
                                 of the NAIN 2.0 startup incubation program supported
@@ -876,6 +1467,7 @@
                                 institutions, and government entities to deliver
                                 compliant and scalable program outcomes.
                             </li>
+
                         </ul>
 
                     </div>
@@ -898,10 +1490,12 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Managed digital banking workflows and financial
                                 CRM / Finacle operations.
                             </li>
+
                         </ul>
 
                     </div>
@@ -924,10 +1518,12 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Supported distributed enterprise infrastructure
                                 and systems stability.
                             </li>
+
                         </ul>
 
                     </div>
@@ -950,11 +1546,13 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Managed federal and state Location Lifecycle
                                 Management (LLM) and RDOF expansion initiatives
                                 across 24 states.
                             </li>
+
                         </ul>
 
                     </div>
@@ -977,6 +1575,7 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Defined and executed annual security programs
                                 comprising 120+ vulnerability assessments across
@@ -987,6 +1586,7 @@
                                 Partnered with APG, Tech & Ops, and BRS teams to
                                 plan, execute, and remediate platform security risks.
                             </li>
+
                         </ul>
 
                     </div>
@@ -1009,11 +1609,13 @@
                         </div>
 
                         <ul>
+
                             <li>
                                 Orchestrated SAFe Agile cadences across M&A
                                 integrations, Moody's product integrations,
                                 and enterprise data migrations.
                             </li>
+
                         </ul>
 
                     </div>
@@ -1025,33 +1627,51 @@
         </section>
 
 
-        <!-- CERTIFICATIONS -->
+        <!-- =====================================================
+             CERTIFICATIONS
+        ====================================================== -->
 
         <section id="certifications" class="skills">
 
             <div class="container">
 
                 <div class="section-heading">
-                    <div class="section-label">Credentials</div>
-                    <h2>Certifications</h2>
+
+                    <div class="section-label">
+                        Credentials
+                    </div>
+
+                    <h2>
+                        Certifications
+                    </h2>
+
                 </div>
+
 
                 <div class="cert-grid">
 
                     <div class="cert-card">
-                        <h3>Project Management Professional (PMP)®</h3>
+                        <h3>
+                            Project Management Professional (PMP)®
+                        </h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>Scrum Master Accredited Certificate</h3>
+                        <h3>
+                            Scrum Master Accredited Certificate
+                        </h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>Google Data Analytics Professional Certificate</h3>
+                        <h3>
+                            Google Data Analytics Professional Certificate
+                        </h3>
                     </div>
 
                     <div class="cert-card">
-                        <h3>IBM Sterling Order Management</h3>
+                        <h3>
+                            IBM Sterling Order Management
+                        </h3>
                     </div>
 
                 </div>
@@ -1061,20 +1681,32 @@
         </section>
 
 
-        <!-- EDUCATION -->
+        <!-- =====================================================
+             EDUCATION
+        ====================================================== -->
 
         <section id="education" class="education">
 
             <div class="container">
 
                 <div class="section-heading">
-                    <div class="section-label">Education</div>
-                    <h2>Academic Background</h2>
+
+                    <div class="section-label">
+                        Education
+                    </div>
+
+                    <h2>
+                        Academic Background
+                    </h2>
+
                 </div>
+
 
                 <div class="education-card">
 
-                    <h3>Master of Business Administration (MBA)</h3>
+                    <h3>
+                        Master of Business Administration (MBA)
+                    </h3>
 
                     <p>
                         Management Science · Indiana University of Pennsylvania
@@ -1083,9 +1715,12 @@
 
                 </div>
 
+
                 <div class="education-card">
 
-                    <h3>Bachelor's Degree</h3>
+                    <h3>
+                        Bachelor's Degree
+                    </h3>
 
                     <p>
                         Gulbarga University, Kalaburgi · 2017 – 2020
@@ -1098,26 +1733,40 @@
         </section>
 
 
-        <!-- CONTACT -->
+        <!-- =====================================================
+             CONTACT
+        ====================================================== -->
 
         <section id="contact" class="contact">
 
-            <h2>Let's Build Something Meaningful.</h2>
+            <h2>
+                Let's Build Something Meaningful.
+            </h2>
 
             <p>
                 Open to conversations around product strategy, AI,
                 digital transformation, innovation, and technology leadership.
             </p>
 
+
             <div class="contact-links">
 
-                <a href="mailto:adityagorkal0@gmail.com">
-                    Email
+                <!-- CHANGE 2:
+                     Opens Gmail compose directly -->
+
+                <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=adityagorkal0@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ✉ Email Me
                 </a>
 
+
                 <a href="tel:+918867643335">
-                    +91 88676 43335
+                    ☎ +91 88676 43335
                 </a>
+
 
                 <a
                     href="https://www.linkedin.com/in/adityagorkal/"
@@ -1134,11 +1783,16 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
 
     <footer>
+
         © 2026 Aditya Gorkal. All rights reserved.
+
     </footer>
+
 
 </body>
 </html>
