@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Aditya Gorkal - Project Manager specializing in Production-grade LLMs, RAG, Agentic AI, Enterprise Strategy, and Program Management at Indian Institute of Information Technology, Raichur.">
+    <meta name="description" content="Aditya Gorkal - Project Manager at IIIT Raichur specializing in Enterprise Digital Transformation, Cross-Functional Leadership, Strategic Management, and Technology Governance.">
     <meta name="author" content="Aditya Gorkal">
 
-    <title>Aditya Gorkal | Project Manager - AI & LLM Systems</title>
+    <title>Aditya Gorkal | Project Manager - IIIT Raichur</title>
 
     <!-- Three.js Library for Rendered 3D Background & Glass Visuals -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -52,6 +52,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             perspective: 1000px;
+            position: relative;
         }
 
         a {
@@ -67,6 +68,49 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
+        }
+
+        /* Floating Sticky Glossy Red Experience Badge */
+        .sticky-experience-badge {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #ff3b5c, #c8102e 60%, #6e0012);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 
+                0 10px 25px rgba(200, 16, 46, 0.6),
+                inset -4px -4px 10px rgba(0, 0, 0, 0.5),
+                inset 4px 4px 10px rgba(255, 255, 255, 0.6);
+            z-index: 9999;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sticky-experience-badge:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 15px 35px rgba(200, 16, 46, 0.8),
+                inset -4px -4px 10px rgba(0, 0, 0, 0.5),
+                inset 4px 4px 12px rgba(255, 255, 255, 0.8);
+        }
+
+        .sticky-badge-text {
+            font-size: 0.85rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         /* Glass Panel Base Styling */
@@ -150,7 +194,7 @@
         }
 
         /* =========================================================
-           HERO & GLASS CIRCULAR EXPERIENCE BADGE
+           HERO SECTION
         ========================================================= */
 
         .hero {
@@ -168,15 +212,15 @@
             width: 100%;
             margin: auto;
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 210px 1fr;
             gap: 50px;
             align-items: center;
         }
 
         .profile-wrapper {
             position: relative;
-            width: 210px;
-            height: 210px;
+            width: 190px;
+            height: 190px;
         }
 
         .profile-photo {
@@ -185,52 +229,9 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--crimson);
-            box-shadow:
+            box-shadow: 
                 0 0 30px rgba(200, 16, 46, 0.4),
                 0 25px 50px rgba(0,0,0,0.6);
-        }
-
-        .experience-circle-badge {
-            position: absolute;
-            bottom: -5px;
-            right: -10px;
-            width: 125px;
-            height: 125px;
-            border-radius: 50%;
-            background: rgba(200, 16, 46, 0.35);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
-            z-index: 5;
-            transition: transform 0.4s ease;
-        }
-
-        .experience-circle-badge:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(200, 16, 46, 0.6);
-        }
-
-        .badge-years {
-            font-size: 1.15rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 3px;
-        }
-
-        .badge-text {
-            font-size: 0.55rem;
-            font-weight: 700;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .hero h1 {
@@ -254,7 +255,7 @@
         }
 
         .hero-title {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: #e2e8f0;
             margin-bottom: 18px;
@@ -733,6 +734,15 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .sticky-experience-badge {
+                width: 90px;
+                height: 90px;
+                right: 15px;
+                bottom: 15px;
+            }
+            .sticky-badge-text {
+                font-size: 0.7rem;
+            }
         }
 
     </style>
@@ -743,6 +753,11 @@
 
     <!-- 3D Rendered WebGL Canvas Container -->
     <div id="canvas-container"></div>
+
+    <!-- Floating Sticky Glossy Red Experience Badge (Right Side - Follows Scroll to Bottom) -->
+    <div class="sticky-experience-badge" title="4 Years Experience">
+        <div class="sticky-badge-text">Experience<br>4 Years</div>
+    </div>
 
 
     <!-- =========================================================
@@ -776,16 +791,11 @@
         <div class="hero-container">
 
             <div class="profile-wrapper">
-                <img
-                    src="my.jpeg"
-                    alt="Aditya Gorkal Profile Photo"
+                <img 
+                    src="my.jpeg" 
+                    alt="Aditya Gorkal Profile Photo" 
                     class="profile-photo"
                 >
-
-                <div class="experience-circle-badge">
-                    <div class="badge-years">4 Years</div>
-                    <div class="badge-text">Exp • IIIT Raichur</div>
-                </div>
             </div>
 
             <div>
@@ -795,16 +805,16 @@
                 </h1>
 
                 <div class="hero-title">
-                    Project Manager | Production-Grade LLMs • RAG Systems • Agentic AI Workflows
+                    Project Manager • Indian Institute of Information Technology, Raichur | Enterprise Digital Transformation • Cross-Functional Leadership • Technology Governance
                 </div>
 
                 <p class="hero-description">
-                    Product Management professional with an MBA from Indiana University of Pennsylvania specializing in AI-driven innovation, enterprise strategy, and production-grade LLM architectures. Experienced across fintech, telecom, enterprise security, and government incubation programs in driving scalable Machine Learning systems.
+                    Product and Program Management professional with an MBA from Indiana University of Pennsylvania, driving enterprise digital transformation, cross-functional strategic alignment, and technology governance across distributed systems, fintech, telecom, and deep-tech incubation platforms.
                 </p>
 
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">
-                        Get In Touch
+                        Open to Work • Let's Connect
                     </a>
                     <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                         LinkedIn
@@ -852,30 +862,31 @@
             <div class="container">
                 <div class="section-heading">
                     <div class="section-label">Summary</div>
-                    <h2>Deploying Intelligence. Scaling AI Platforms.</h2>
+                    <h2>Strategic Management for Scaling AI Platforms.</h2>
                 </div>
 
                 <div class="about-grid">
                     <div class="glass-panel about-card">
                         <p>
-                            Product and Program Management professional with an MBA from Indiana University of Pennsylvania, with a focus on cutting-edge AI technologies, retrieval architectures, and scalable machine learning solutions.
+                            Product and Program Management professional with an MBA from Indiana University of Pennsylvania, specializing in enterprise digital transformation, strategic technology governance, cross-functional leadership, and distributed systems.
                         </p>
                         <p>
-                            Experienced in translating enterprise requirements into production-grade LLM pipelines, Agentic workflows, and RAG architectures across banking, telecom, academia, and government tech incubation ecosystems.
+                            Proven track record translating complex enterprise vision into scalable operational frameworks, bridging high-level corporate strategy with cross-functional technical implementation across financial services, telecommunications, distributed logistics, and technology incubators.
                         </p>
                         <p>
-                            Currently serving as Project Manager at <strong>Indian Institute of Information Technology, Raichur</strong>, managing the NAIN 2.0 PMU program and orchestrating deep-tech and AI startup evaluation frameworks.
+                            Currently serving as Project Manager at <strong>Indian Institute of Information Technology, Raichur</strong>, managing the NAIN 2.0 PMU initiative under KITS to nurture deep-tech incubation frameworks and strategic industry partnerships.
                         </p>
                     </div>
 
                     <div class="glass-panel focus-card">
                         <h3>Core Competencies</h3>
                         <ul>
-                            <li>Production-Grade LLM Deployments</li>
-                            <li>Retrieval-Augmented Generation (RAG)</li>
-                            <li>Agentic AI Workflows & Orchestration</li>
-                            <li>MLOps & ML Model Deployment R&D</li>
-                            <li>Startup Incubation & NAIN 2.0 PMU</li>
+                            <li>Enterprise Digital Transformation</li>
+                            <li>Product Lifecycle Strategy & Management</li>
+                            <li>Cross-Functional Leadership & Alignment</li>
+                            <li>Technology Governance & Risk Management</li>
+                            <li>Production-Grade AI & Distributed Systems</li>
+                            <li>Stakeholder Engagement & PMO Execution</li>
                         </ul>
                     </div>
                 </div>
@@ -897,8 +908,8 @@
                 <div class="skill-grid">
                     <div class="glass-panel skill-card">
                         <div class="skill-icon">01</div>
-                        <h3>R&D in ML Model Deployment & Implementation</h3>
-                        <p>Conducting R&D for translating machine learning models into robust, production-ready inference engines, enterprise APIs, and scalable infrastructure.</p>
+                        <h3>Enterprise Strategy & Stakeholder Assessment</h3>
+                        <p>Formulating high-level strategic roadmaps, conducting comprehensive stakeholder evaluations, aligning business objectives with technology execution, and driving executive decision-making across complex enterprise initiatives.</p>
                     </div>
 
                     <div class="glass-panel skill-card">
@@ -943,9 +954,9 @@
                         <p class="timeline-desc">Overseeing the IIIT Raichur-PMU for the NAIN 2.0 Program under KITS (Government of Karnataka), fostering student startups with focus on AI-driven platforms, deep-tech research, and machine learning deployments.</p>
                         <ul>
                             <li>Coordinate with NHIs for smooth implementation of NAIN 2.0 incubator initiatives and deep-tech innovation pipelines.</li>
-                            <li>Facilitate screening, technical evaluation, and milestone reviews for startup proposals leveraging LLMs, RAG, and AI technologies.</li>
+                            <li>Facilitate screening, technical evaluation, and milestone reviews for startup proposals.</li>
                             <li>Monitor project progress, fund utilization, and program outcomes across participating research institutes.</li>
-                            <li>Act as liaison between KITS, academic leads, ML researchers, and industry mentors to operationalize production AI models.</li>
+                            <li>Act as liaison between KITS, NHIs and PMU in collaboration with Industry experts and Venture Capitalist.</li>
                             <li>Ensure compliance, timely submission of reports, UCs, and technical documentation.</li>
                         </ul>
                     </div>
@@ -961,8 +972,8 @@
                             <div class="timeline-date">May 2025 - December 2025</div>
                         </div>
                         <ul>
-                            <li>Utilized Finacle and CRM enterprise platforms to manage core operations and automated data workflows.</li>
-                            <li>Assisted in evaluating automated risk and customer interaction pipelines using financial data analytics.</li>
+                            <li>Utilized Finacle and CRM enterprise platforms to manage core banking operations and automated data workflows.</li>
+                            <li>Managed direct customer relationships, banking operations, financial advisory, and retail credit evaluation to drive portfolio growth.</li>
                         </ul>
                     </div>
 
@@ -977,8 +988,9 @@
                             <div class="timeline-date">May 2024 - August 2024</div>
                         </div>
                         <ul>
-                            <li>Supported distributed enterprise architecture and cloud server operations powering real-time data pipelines.</li>
-                            <li>Participated in monitoring fault-tolerant distributed environments supporting high-throughput automated services.</li>
+                            <li>Managed and optimized warehouse, supply chain, logistics, inventory management, and order fulfillment systems across enterprise distribution channels.</li>
+                             <li>Coordinated reverse logistics workflows through Manhattan Associates WMS, improving returns processing, inventory visibility, warehouse utilization, and end-to-end material flow.</li>
+                            <li>Supported distributed systems by monitoring interconnected applications, troubleshooting system dependencies, and coordinating issue resolution to maintain reliable data flow and service availability.</li>
                         </ul>
                     </div>
 
@@ -994,8 +1006,8 @@
                         </div>
                         <p class="timeline-desc">Analyzed complex data systems for Location Lifecycle Management (LLM) federal assistance programs across 24 states under the RDOF initiative.</p>
                         <ul>
-                            <li>Elicited business and functional requirements for scalable data pipelines handling location lifecycle metadata across 24 US states.</li>
-                            <li>Bridged technical gaps between data science teams, telecom engineers, and compliance authorities for automated service qualification.</li>
+                            <li>Elicited business and functional requirements for scalable data pipelines orchestrating location lifecycle metadata through AWS services.</li>
+                            <li>Bridged technical gaps between business intelligence (BI) teams, SDE engineers, and compliance authorities for service qualification.</li>
                         </ul>
                     </div>
 
@@ -1010,8 +1022,8 @@
                             <div class="timeline-date">August 2022 - February 2023</div>
                         </div>
                         <ul>
-                            <li>Engineered and deployed an automated Program Management pipeline for cyber security risk assessment across 120+ mission-critical applications including Aladdin and BlackRock.com.</li>
-                            <li>Partnered with APG, Tech & Ops, and BRS teams to streamline vulnerability remediation using structured, automated tracking frameworks.</li>
+                            <li>Engineered and deployed an automated Program Management pipeline in accordance with OWASP guidelines for cyber security risk assessment across 120+ critical applications including Aladdin, iShares and BlackRock.com.</li>
+                            <li>Partnered with APG, Tech & Ops, and BRS teams to streamline vulnerability remediation and pen testing using structured, automated tracking frameworks.</li>
                         </ul>
                     </div>
 
@@ -1027,7 +1039,7 @@
                         </div>
                         <ul>
                             <li>Orchestrated Agile SAFe cadence across complex financial initiatives, including Moody’s product integration and enterprise data migration projects.</li>
-                            <li>Facilitated cross-functional collaboration between engineering and business stakeholders to accelerate intelligent software deployment.</li>
+                            <li>Facilitated cross-functional collaboration between engineering and business stakeholders to accelerate merger and acquisition IT integration strategies.</li>
                         </ul>
                     </div>
 
@@ -1066,7 +1078,7 @@
 
 
         <!-- =====================================================
-             HONORS & AWARDS (SEPARATE SECTION)
+             HONORS & AWARDS
         ====================================================== -->
 
         <section id="honors" class="reveal-3d">
@@ -1082,7 +1094,7 @@
                         <h3>Project Manager Recognition</h3>
                         <div class="honors-company">BlackRock</div>
                         <p>
-                            Successfully designed and deployed an enterprise-wide Program Management pipeline for cybersecurity risk assessment across 120+ mission-critical application ecosystems. Honored for exceptional execution in orchestrating cross-functional security remediations and streamlining risk governance.
+                            Successfully designed and deployed an enterprise-wide Program Management pipeline for cybersecurity risk assessment across 120+ security-critical application ecosystems. Honored for exceptional execution in orchestrating cross-functional security remediations and streamlining risk governance.
                         </p>
                     </div>
                 </div>
@@ -1126,8 +1138,8 @@
         <section id="contact" class="reveal-3d">
             <div class="container">
                 <div class="glass-panel contact-card">
-                    <h2>Let's Connect</h2>
-                    <p>Currently serving as Project Manager at Indian Institute of Information Technology, Raichur. Open to discussions on production LLMs, Agentic AI, and enterprise strategy.</p>
+                    <h2>Open to Work • Let's Connect</h2>
+                    <p>Currently working as Project Manager at Indian Institute of Information Technology, Raichur. Open to leadership and management discussions on Enterprise Strategy, Cost Optimization, Digital Transformation, Ethics and Governance.</p>
 
                     <div class="contact-details">
                         <span>📱 +91 8867643335</span>
@@ -1152,7 +1164,7 @@
     ========================================================= -->
 
     <footer>
-        <p>&copy; Aditya Gorkal • Indian Institute of Information Technology, Raichur. All rights reserved.</p>
+        <p>&copy; Aditya Gorkal • Product Management Professional. All rights reserved.</p>
     </footer>
 
 
