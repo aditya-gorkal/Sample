@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Aditya Gorkal - Regional Ecosystem Coordinator specializing in AI, digital transformation, product strategy and innovation at Indian Institute of Information Technology, Raichur.">
+    <meta name="description" content="Aditya Gorkal - Project Manager specializing in AI paradigms, enterprise strategy, startup incubation, stakeholder engagement, and program management at Indian Institute of Information Technology, Raichur.">
     <meta name="author" content="Aditya Gorkal">
 
-    <title>Aditya Gorkal | Regional Ecosystem Coordinator</title>
+    <title>Aditya Gorkal | Project Manager</title>
 
-    <!-- Three.js Library for 3D Rendered Objects Background -->
+    <!-- Three.js Library for Rendered 3D Background & Glass Visuals -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
@@ -245,6 +245,15 @@
             color: var(--crimson-light);
         }
 
+        .hero-subtitle {
+            color: var(--crimson-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 8px;
+        }
+
         .hero-title {
             font-size: 1.4rem;
             font-weight: 700;
@@ -429,7 +438,7 @@
 
         .skill-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -473,14 +482,34 @@
            EXPERIENCE TIMELINE
         ========================================================= */
 
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
         .timeline-card {
-            padding: 40px;
+            padding: 35px 40px;
             position: relative;
             border-left: 4px solid var(--crimson);
         }
 
+        .timeline-card:hover {
+            border-color: var(--crimson-light);
+            background: var(--glass-card-hover);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
         .timeline-role {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: white;
         }
@@ -488,15 +517,31 @@
         .timeline-company {
             color: var(--crimson-light);
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-top: 4px;
+            font-size: 1.05rem;
+            margin-top: 2px;
+        }
+
+        .timeline-location {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .timeline-date {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin: 6px 0 18px;
-            font-weight: 600;
+            color: var(--crimson-light);
+            font-size: 0.88rem;
+            font-weight: 700;
+            background: rgba(200, 16, 46, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(200, 16, 46, 0.3);
+        }
+
+        .timeline-card p.timeline-desc {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-style: italic;
         }
 
         .timeline-card ul {
@@ -505,8 +550,9 @@
         }
 
         .timeline-card li {
-            margin-bottom: 10px;
-            line-height: 1.7;
+            margin-bottom: 8px;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* =========================================================
@@ -515,7 +561,7 @@
 
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -531,8 +577,14 @@
         }
 
         .cert-card h3 {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: white;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         .education-card {
@@ -548,6 +600,40 @@
 
         .education-card p {
             color: var(--text-muted);
+        }
+
+        .education-card .degree-date {
+            color: var(--crimson-light);
+            font-weight: 600;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+
+        /* =========================================================
+           HONORS & AWARDS
+        ========================================================= */
+
+        .honors-card {
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 4px solid var(--crimson-light);
+        }
+
+        .honors-icon {
+            font-size: 2.5rem;
+        }
+
+        .honors-info h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .honors-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         /* =========================================================
@@ -571,6 +657,22 @@
             max-width: 650px;
             margin: 0 auto 30px;
             font-size: 1.05rem;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .contact-details span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .contact-links {
@@ -597,7 +699,7 @@
         ========================================================= */
 
         @media (max-width: 900px) {
-            .skill-grid, .cert-grid, .metric-grid {
+            .skill-grid, .cert-grid, .metric-grid, .education-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .about-grid {
@@ -617,8 +719,12 @@
             .hero-buttons {
                 justify-content: center;
             }
-            .skill-grid, .cert-grid, .metric-grid {
+            .skill-grid, .cert-grid, .metric-grid, .education-grid {
                 grid-template-columns: 1fr;
+            }
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -643,7 +749,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Expertise</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#education">Education</a></li>
@@ -676,24 +782,28 @@
             </div>
 
             <div>
+                <div class="hero-subtitle">Navigating AI paradigms</div>
                 <h1>
                     Aditya <span>Gorkal</span>
                 </h1>
 
                 <div class="hero-title">
-                    Regional Ecosystem Coordinator | AI • Strategy • Digital Transformation
+                    Project Manager | Enterprise Strategy • Startup Incubation • AI Solutions
                 </div>
 
                 <p class="hero-description">
-                    Professional focused on technology-driven solutions, scaling startup incubation initiatives, and solving complex problems with measurable outcomes. Currently working at Indian Institute of Information Technology, Raichur.
+                    Product Management professional with an MBA from Indiana University of Pennsylvania and a strong passion for innovation, technology, and entrepreneurship. Experienced across investment banking, telecom, academia, enterprise tech, and government ecosystems to foster growth and scale impact-driven solutions.
                 </p>
 
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">
                         Get In Touch
                     </a>
-                    <a href="https://www.linkedin.com/in/adityagorkal/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                    <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                         LinkedIn
+                    </a>
+                    <a href="https://github.com/aditya-gorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                        GitHub
                     </a>
                 </div>
             </div>
@@ -719,7 +829,7 @@
             </div>
             <div class="glass-panel metric-card">
                 <div class="metric-number">24</div>
-                <div class="metric-label">States Managed</div>
+                <div class="metric-label">States Managed (RDOF)</div>
             </div>
             <div class="glass-panel metric-card">
                 <div class="metric-number">MBA</div>
@@ -738,30 +848,31 @@
         <section id="about" class="reveal-3d">
             <div class="container">
                 <div class="section-heading">
-                    <div class="section-label">Profile</div>
-                    <h2>Building Ecosystems. Driving Transformation.</h2>
+                    <div class="section-label">Summary</div>
+                    <h2>Building Innovations. Translating Challenges.</h2>
                 </div>
 
                 <div class="about-grid">
                     <div class="glass-panel about-card">
                         <p>
-                            Product and program professional holding an MBA from Indiana University of Pennsylvania, with 4 years of experience across fintech, technology, and ecosystem building.
+                            Product Management professional with an MBA from Indiana University of Pennsylvania and a strong passion for innovation, technology, and entrepreneurship.
                         </p>
                         <p>
-                            My expertise sits at the intersection of business strategy, technology, and operational execution. I specialize in turning complex organizational objectives into structured roadmaps, incubation frameworks, and measurable outcomes.
+                            Experienced in enterprise strategy, startup incubation, stakeholder engagement, and program management across investment banking, telecom, academia, enterprises, and government ecosystems.
                         </p>
                         <p>
-                            Currently serving as Regional Ecosystem Coordinator at <strong>Indian Institute of Information Technology, Raichur</strong>, overseeing startup incubation operations, technology evaluations, and government-backed innovation frameworks.
+                            With expertise in Operations & Management, AI-driven solutions, and business strategy, I excel at translating complex challenges into scalable, impact-driven solutions while building meaningful collaborations that create long-term value.
                         </p>
                     </div>
 
                     <div class="glass-panel focus-card">
-                        <h3>Core Focus Areas</h3>
+                        <h3>Core Competencies</h3>
                         <ul>
-                            <li>Startup Ecosystem Leadership</li>
-                            <li>Enterprise Product Strategy</li>
-                            <li>AI & Tech Transformation</li>
-                            <li>Stakeholder & Program Governance</li>
+                            <li>Enterprise Strategy & AI Solutions</li>
+                            <li>Startup Incubation & NAIN 2.0 PMU</li>
+                            <li>Agile / SAFe Cadence Leadership</li>
+                            <li>Security Program & Risk Remediation</li>
+                            <li>Multi-Stakeholder Engagement</li>
                         </ul>
                     </div>
                 </div>
@@ -770,39 +881,33 @@
 
 
         <!-- =====================================================
-             EXPERTISE / SKILLS
+             TOP SKILLS
         ====================================================== -->
 
         <section id="skills" class="reveal-3d">
             <div class="container">
                 <div class="section-heading">
                     <div class="section-label">Capabilities</div>
-                    <h2>Areas of Expertise</h2>
+                    <h2>Top Skills</h2>
                 </div>
 
                 <div class="skill-grid">
                     <div class="glass-panel skill-card">
                         <div class="skill-icon">01</div>
-                        <h3>Ecosystem Management</h3>
-                        <p>Incubation pipelines, mentor network activation, and multi-stakeholder program governance.</p>
+                        <h3>Research & Development (R&D)</h3>
+                        <p>Driving technological innovation, screening startup proposals, and managing research-to-market pipelines.</p>
                     </div>
 
                     <div class="glass-panel skill-card">
                         <div class="skill-icon">02</div>
-                        <h3>Product Strategy</h3>
-                        <p>Roadmapping, market validation, requirement definition, and project execution.</p>
+                        <h3>User Stories & Requirements</h3>
+                        <p>Translating complex business needs into clear user stories, impact & gap analyses, and agile backlogs.</p>
                     </div>
 
                     <div class="glass-panel skill-card">
                         <div class="skill-icon">03</div>
-                        <h3>AI & Tech Innovation</h3>
-                        <p>Leveraging emerging technologies, digital tools, and scalable frameworks.</p>
-                    </div>
-
-                    <div class="glass-panel skill-card">
-                        <div class="skill-icon">04</div>
-                        <h3>Data & Performance</h3>
-                        <p>Translating key metrics and operational analytics into structured executive insights.</p>
+                        <h3>Data Visualization</h3>
+                        <p>Leveraging analytics, reporting frameworks, and performance metrics to guide executive decisions.</p>
                     </div>
                 </div>
             </div>
@@ -820,15 +925,109 @@
                     <h2>Professional Experience</h2>
                 </div>
 
-                <div class="glass-panel timeline-card">
-                    <div class="timeline-role">Regional Ecosystem Coordinator</div>
-                    <div class="timeline-company">Indian Institute of Information Technology, Raichur</div>
-                    <div class="timeline-date">Present • 4 Years Total Experience</div>
-                    <ul>
-                        <li>Directing regional startup ecosystem programs, innovation funding pipelines, and stakeholder coordination at Indian Institute of Information Technology, Raichur.</li>
-                        <li>Evaluating early-stage technological innovations, mentoring founders, and aligning academic research with industry integration.</li>
-                        <li>Managing strategic multi-partner collaborations across regional entities and academic leadership.</li>
-                    </ul>
+                <div class="timeline-container">
+
+                    <!-- IIIT Raichur -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Project Manager</div>
+                                <div class="timeline-company">Indian Institute of Information Technology, Raichur</div>
+                                <div class="timeline-location">Raichur, Karnataka, India</div>
+                            </div>
+                            <div class="timeline-date">April 2026 - Present</div>
+                        </div>
+                        <p class="timeline-desc">The Government of Karnataka, through KITS, implements the NAIN 2.0 Program to promote innovation, entrepreneurship, and startup culture among students. The IIIT Raichur-PMU ensures effective program implementation, monitoring, coordination, and compliance across participating institutions.</p>
+                        <ul>
+                            <li>Coordinate with NHIs for smooth implementation of NAIN 2.0 activities.</li>
+                            <li>Monitor project progress, fund utilization, and program outcomes.</li>
+                            <li>Facilitate screening, review, evaluation of startup proposals, and project closure.</li>
+                            <li>Ensure timely submission of reports, UCs, and documentation.</li>
+                            <li>Act as a liaison between KITS, NHIs, mentors, and stakeholders for effective program execution.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Karnataka Bank -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Probationary Officer</div>
+                                <div class="timeline-company">Karnataka Bank</div>
+                                <div class="timeline-location">India</div>
+                            </div>
+                            <div class="timeline-date">May 2025 - December 2025</div>
+                        </div>
+                        <ul>
+                            <li>Core banking operations utilizing Finacle and CRM enterprise platforms.</li>
+                            <li>Managed customer relations, financial workflows, and banking process optimization.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Giant Eagle -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Distributed Systems Support</div>
+                                <div class="timeline-company">Giant Eagle, Inc.</div>
+                                <div class="timeline-location">Pittsburgh, Pennsylvania, United States</div>
+                            </div>
+                            <div class="timeline-date">May 2024 - August 2024</div>
+                        </div>
+                        <ul>
+                            <li>Provided infrastructure and systems support for large-scale distributed retail platforms and enterprise IT environments.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Charter Communications -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Business System Analyst</div>
+                                <div class="timeline-company">Charter Communications</div>
+                                <div class="timeline-location">St. Louis, MO, United States</div>
+                            </div>
+                            <div class="timeline-date">February 2023 - May 2024</div>
+                        </div>
+                        <p class="timeline-desc">Worked on LLM (Location Lifecycle Management), a federal/state assistance program providing phone & broadband discounts for low-income consumers under RDOF bid across 24 states.</p>
+                        <ul>
+                            <li>Analyzed business systems and user requirements for Lifeline program rollout across RDOF locations in 24 US states.</li>
+                            <li>Bridged business needs and system capabilities for federal and state compliance across telecom networks.</li>
+                        </ul>
+                    </div>
+
+                    <!-- BlackRock -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Project Manager (PMO)</div>
+                                <div class="timeline-company">BlackRock</div>
+                                <div class="timeline-location">Bear, Delaware, United States</div>
+                            </div>
+                            <div class="timeline-date">August 2022 - February 2023</div>
+                        </div>
+                        <ul>
+                            <li>Defined strategy, designed, and implemented annual security testing program of 120+ assessments of internally developed, vendor-managed, and cloud systems (e.g., Aladdin, BlackRock.com).</li>
+                            <li>Partnered with stakeholders across APG, Tech & Ops, and BRS to plan, execute, and remediate identified security vulnerabilities.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Truist -->
+                    <div class="glass-panel timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-role">Scrum Master</div>
+                                <div class="timeline-company">Truist</div>
+                                <div class="timeline-location">Dallas, TX, United States</div>
+                            </div>
+                            <div class="timeline-date">January 2022 - August 2022</div>
+                        </div>
+                        <ul>
+                            <li>Orchestrated Agile SAFe cadence across complex financial initiatives including Moody’s product integration, M&A programs, and enterprise data migration projects.</li>
+                            <li>Led stakeholder management, requirement elicitation, impact & gap analysis to enable seamless cross-functional collaboration.</li>
+                            <li>Facilitated business process mapping and documentation while fostering high-performing Agile teams delivering scalable solutions.</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -847,16 +1046,13 @@
 
                 <div class="cert-grid">
                     <div class="glass-panel cert-card">
-                        <h3>Certified Product Manager</h3>
+                        <h3>IBM Sterling Order Management</h3>
                     </div>
                     <div class="glass-panel cert-card">
-                        <h3>Agile & Scrum Master</h3>
+                        <h3>Scrum Master Accredited Certificate</h3>
                     </div>
                     <div class="glass-panel cert-card">
-                        <h3>AI Strategy Specialist</h3>
-                    </div>
-                    <div class="glass-panel cert-card">
-                        <h3>Enterprise Digital Transformation</h3>
+                        <h3>Google Data Analytics</h3>
                     </div>
                 </div>
             </div>
@@ -864,19 +1060,37 @@
 
 
         <!-- =====================================================
-             EDUCATION
+             EDUCATION & HONORS
         ====================================================== -->
 
         <section id="education" class="reveal-3d">
             <div class="container">
                 <div class="section-heading">
                     <div class="section-label">Academic Background</div>
-                    <h2>Education</h2>
+                    <h2>Education & Honors</h2>
                 </div>
 
-                <div class="glass-panel education-card">
-                    <h3>Master of Business Administration (MBA)</h3>
-                    <p>Indiana University of Pennsylvania</p>
+                <div class="education-grid" style="margin-bottom: 25px;">
+                    <div class="glass-panel education-card">
+                        <h3>Master of Business Administration (MBA)</h3>
+                        <p><strong>Indiana University of Pennsylvania</strong></p>
+                        <p>Specialization: Management Science</p>
+                        <div class="degree-date">September 2020 - May 2022</div>
+                    </div>
+
+                    <div class="glass-panel education-card">
+                        <h3>Bachelor's Degree</h3>
+                        <p><strong>Gulbarga University, Kalaburgi</strong></p>
+                        <div class="degree-date">July 2017 - June 2020</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel honors-card">
+                    <div class="honors-icon">🏆</div>
+                    <div class="honors-info">
+                        <h3>Honors & Awards: Project Manager</h3>
+                        <p>Recognized for outstanding leadership in project execution, stakeholder coordination, and technology initiative delivery.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -890,11 +1104,18 @@
             <div class="container">
                 <div class="glass-panel contact-card">
                     <h2>Let's Connect</h2>
-                    <p>Currently serving as Regional Ecosystem Coordinator at Indian Institute of Information Technology, Raichur. Open to strategic discussions and ecosystem collaborations.</p>
+                    <p>Currently serving as Project Manager at Indian Institute of Information Technology, Raichur. Open to strategic discussions, AI paradigms, and innovation collaborations.</p>
+
+                    <div class="contact-details">
+                        <span>📱 +91 8867643335</span>
+                        <span>✉️ gorkal1028@gmail.com</span>
+                        <span>📍 Raichur, India</span>
+                    </div>
 
                     <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/adityagorkal/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn</a>
-                        <a href="mailto:contact@adityagorkal.com" class="btn btn-outline">Email Me</a>
+                        <a href="https://www.linkedin.com/in/adityagorkal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn</a>
+                        <a href="https://github.com/aditya-gorkal" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub</a>
+                        <a href="mailto:gorkal1028@gmail.com" class="btn btn-outline">Email Me</a>
                     </div>
                 </div>
             </div>
@@ -908,7 +1129,7 @@
     ========================================================= -->
 
     <footer>
-        <p>&copy; Aditya Gorkal. Indian Institute of Information Technology, Raichur. All rights reserved.</p>
+        <p>&copy; Aditya Gorkal • Indian Institute of Information Technology, Raichur. All rights reserved.</p>
     </footer>
 
 
